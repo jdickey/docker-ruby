@@ -13,20 +13,30 @@
 
 I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/), install additional software packages, and do some basic Ruby housekeeping (installing Bundler and making sure the system Gems are up-to-date). Building against [`2.4.2-jessie`](https://github.com/docker-library/ruby/blob/73d3ed6b06738a7457a24fba9024cad303829c0a/2.4/jessie/Dockerfile) on a 2011 iMac and a decent Net connection, this can take about *20 minutes.* Repeat this half-a-dozen times over the course of a day and you've lost two hours. As Orwell wrote, *doubleplus ungood.*
 
-This repo offers four variations on (presently) a single Ruby version:
+## Supported Tags and Respective Dockerfile Links
 
-* `2.4.2-jessie`, `2.4-jessie` `2-jessie`, `jessie`, `2.4.2`, `2.4`, `2`, and `latest` are all built from [this `Dockerfile`](https://github.com/jdickey/docker-ruby/2.4/jessie/Dockerfile). It is built from the official `ruby:2.4.2-jessie` build, with both the below [base software](#base-software) and [Qt4 software](#qt4-software) installed, as well as the current version of Bundler at the time the image was built (presently 1.16.0);
-* `2.4.2-jessie-no-qt`, `2.4-jessie-no-qt`, `2-jessie-no-qt`, `jessie-no-qt`, `2.4.2-no-qt`, `2.4-no-qt`, `2-no-qt`, and `no-qt` are all built from [this `Dockerfile`](https://github.com/jdickey/docker-ruby/2.4/jessie/no-qt/Dockerfile). It is built from the official `ruby:2.4.2-jessie` build, with the [base software](#base-software) installed **but not** the [Qt4 software](#qt4-software). The current version of Bundler is also installed;
-* `2.4.2-jessie-slim`, `2.4-jessie-slim` `2-jessie-slim`, `jessie-slim`, `2.4.2-slim`, `2.4-slim`, `2-slim`, and `slim` are all built from [this `Dockerfile`](https://github.com/jdickey/docker-ruby/2.4/jessie/slim/Dockerfile). It is built from the official `ruby:2.4.2-jessie-slim` build, with both the below [base software](#base-software) and [Qt4 software](#qt4-software) installed, as well as the current version of Bundler at the time the image was built (presently 1.16.0);
-* `2.4.2-jessie-slim-no-qt`, `2.4-jessie-slim-no-qt`, `2-jessie-slim-no-qt`, `jessie-slim-no-qt`, `2.4.2-slim-no-qt`, `2.4-slim-no-qt`, `2-slim-no-qt`, and `slim-no-qt` are all built from [this `Dockerfile`](https://github.com/jdickey/docker-ruby/2.4/jessie/slim/no-qt/Dockerfile). It is built from the official `ruby:2.4.2-jessie` build, with the [base software](#base-software) installed **but not** the [Qt4 software](#qt4-software). The current version of Bundler is also installed.
+* `2.5.0-stretch`, `2.5-stretch`, `2-stretch`, `stretch`, `2.5.0`, `2.5`, `2`, `latest` ([*2.5.0/stretch/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/Dockerfile))
+* `2.5.0-stretch-no-qt`, `2.5-stretch-no-qt`, `2-stretch-no-qt`, `stretch-no-qt`, `2.5.0-no-qt`, `2.5-no-qt` ([*2.5.0/stretch/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/no-qt/Dockerfile))
+* `2.5.0-stretch-slim`, `2.5-stretch-slim`, `2-stretch-slim`, `stretch-slim`, `2.5.0-slim`, `2.5-slim` ([*2.5.0/stretch/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/slim/Dockerfile))
+* `2.5.0-stretch-slim-no-qt`, `2.5-stretch-slim-no-qt`, `2-stretch-slim-no-qt`, `stretch-slim-no-qt`, `2.5.0-slim-no-qt`, `2.5-slim-no-qt` ([*2.5.0/stretch/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/slim/no-qt/Dockerfile))
+* `2.5.0-alpine`, `2.5-alpine`, `2-alpine`, `alpine` ([*2.5.0/stretch/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/Dockerfile))
+* `2.5.0-alpine-no-qt`, `2.5-alpine-no-qt`, `2-alpine-no-qt`, `alpine-no-qt` ([*2.5.0/alpine/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/alpine/no-qt/Dockerfile))
+* `2.4.2-jessie`, `2.4-jessie`, `2-jessie`, `jessie`, `2.4.2`, `2.4` ([*2.4/jessie/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/Dockerfile))
+* `2.4.2-jessie-no-qt`, `2.4-jessie-no-qt`, `2-jessie-no-qt`, `jessie-no-qt`, `2.4.2-no-qt`, `2.4-no-qt` ([*2.4/jessie/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/no-qt/Dockerfile))
+* `2.4.2-jessie-slim`, `2.4-jessie-slim`, `2-jessie-slim`, `jessie-slim`, `2.4.2-slim`, `2.4-slim` ([*2.4/jessie/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/Dockerfile))
+* `2.4.2-jessie-slim-no-qt`, `2.4-jessie-slim-no-qt`, `2-jessie-slim-no-qt`, `jessie-slim-no-qt`, `2.4.2-slim-no-qt`, `2.4-slim-no-qt` ([*2.4/jessie/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/no-qt/Dockerfile))
 
-Yes, that's 32 tags for 4 images. 😩
+The `*-no-qt` tags have no version of the Qt GUI libraries installed; those not so marked have Qt5 for (Debian) Stretch and Alpine, and Qt4 for (Debian) Jessie.
+
+There are no "slim" images for Alpine, as the entire point of Alpine is *to be a* minimal base distribution.
 
 # Software
 
-## Base Software
+## Debian Stretch or Jessie
 
-The following Debian packages are installed in all images of this repo:
+### Base Software
+
+The following Debian packages are installed in Debian-based images of this repo:
 
 * `build-essential`
 * `curl`
@@ -39,14 +49,44 @@ The following Debian packages are installed in all images of this repo:
 * `wget`
 * `zsh`
 
-## Qt4 Software
+### Qt5 Software (for Stretch)
 
-The following Debian packages are installed in all images not tagged `no-qt` of this repo. This is useful for test-mode builds that include tools such as [Capybara](https://github.com/teamcapybara/capybara):
+The following Debian packages are installed in Stretch images not tagged `no-qt` of this repo. This is useful for test-mode builds that include tools such as [Capybara](https://github.com/teamcapybara/capybara):
+
+* `libqtwebkit-dev`
+* `xvfb`
+
+### Qt4 Software (for Jessie)
+
+The following Debian packages are installed in Jessie images not tagged `no-qt` of this repo. This is useful for test-mode builds that include tools such as [Capybara](https://github.com/teamcapybara/capybara):
 
 * `libqt4-dev`
 * `libqt4-webkit`
 * `xvfb`
 
+## Alpine Linux
+
+### Base Software
+
+The following Alpine packages are installed in Alpine-based images of this repo:
+
+* `alpine-sdk`
+* `bash`
+* `build-base`
+* `nodejs`
+* `postgresql-client`
+* `postgresql-dev`
+* `tzdata`
+* `zsh`
+
+### Qt5 Software
+
+The following Alpine packages are installed in Alpine images not tagged `no-qt` of this repo. This is useful for test-mode builds that include tools such as [Capybara](https://github.com/teamcapybara/capybara):
+
+* `libxml2-dev`
+* `libxslt-dev`
+* `qt5-qtwebkit-dev`
+* `xvfb`
 
 # Additional Documentation
 
