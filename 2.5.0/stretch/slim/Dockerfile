@@ -1,11 +1,9 @@
-FROM ruby:2.5-slim
-ENV LANG en_US.UTF-8
-ENV LC_ALL C
-RUN apt-get update -qq && apt-get install -y build-essential \
-    libpq-dev postgresql-client \
-    libxml2-dev libxslt1-dev \
-    libqtwebkit-dev xvfb \
-    nodejs curl sudo wget zsh && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN gem install bundler && gem update && gem update --system
-RUN gem cleanup
+FROM jdickey/ruby:2.5.0-slim-no-qt
+LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
+LABEL description="Base image for Ruby 2.5.0 on slimmed-down Debian Stretch, with Qt and capybara-webkit"
+LABEL includesQt=true
+LABEL version="0.9.0"
+RUN apt-get update -qq && \
+    apt-get install -y libqtwebkit-dev xvfb && \
+    apt-get clean && find /var/lib/apt/lists/* -delete
+RUN gem install capybara-webkit && gem update && gem update --system && gem cleanup

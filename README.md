@@ -1,11 +1,17 @@
-<h1>jdickey's Customised Ruby Builds</h1>
+# [jdickey's Customised Ruby Builds](https://github.com/jdickey/docker-ruby)
 
-<h1>Contents</h1>
+# Contents
 
 - [Overview](#overview)
+  * [Supported Tags and Respective Dockerfile Links](#supported-tags-and-respective-dockerfile-links)
 - [Software](#software)
-  * [Base Software](#base-software)
-  * [Qt4 Software](#qt4-software)
+  * [Debian Stretch or Jessie](#debian-stretch-or-jessie)
+    + [Base Software](#base-software)
+    + [Qt5 Software (for Stretch)](#qt5-software-for-stretch)
+    + [Qt4 Software (for Jessie)](#qt4-software-for-jessie)
+  * [Alpine Linux](#alpine-linux)
+    + [Base Software](#base-software-1)
+    + [Qt5 Software](#qt5-software)
 - [Additional Documentation](#additional-documentation)
 - [Legal](#legal)
 
@@ -16,19 +22,21 @@ I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/)
 ## Supported Tags and Respective Dockerfile Links
 
 * `2.5.0-stretch`, `2.5-stretch`, `2-stretch`, `stretch`, `2.5.0`, `2.5`, `2`, `latest` ([*2.5.0/stretch/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/Dockerfile))
-* `2.5.0-stretch-no-qt`, `2.5-stretch-no-qt`, `2-stretch-no-qt`, `stretch-no-qt`, `2.5.0-no-qt`, `2.5-no-qt` ([*2.5.0/stretch/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/no-qt/Dockerfile))
+* `2.5.0-stretch-no-qt`, `2.5-stretch-no-qt`, `2-stretch-no-qt`, `stretch-no-qt`, `2.5.0-no-qt`, `2.5-no-qt`, `2-no-qt` ([*2.5.0/stretch/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/no-qt/Dockerfile))
 * `2.5.0-stretch-slim`, `2.5-stretch-slim`, `2-stretch-slim`, `stretch-slim`, `2.5.0-slim`, `2.5-slim` ([*2.5.0/stretch/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/slim/Dockerfile))
-* `2.5.0-stretch-slim-no-qt`, `2.5-stretch-slim-no-qt`, `2-stretch-slim-no-qt`, `stretch-slim-no-qt`, `2.5.0-slim-no-qt`, `2.5-slim-no-qt` ([*2.5.0/stretch/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/slim/no-qt/Dockerfile))
+* `2.5.0-stretch-slim-no-qt`, `2.5-stretch-slim-no-qt`, `2-stretch-slim-no-qt`, `stretch-slim-no-qt`, `2.5.0-slim-no-qt`, `2.5-slim-no-qt`, `2-slim-no-qt`, `slim-no-qt` ([*2.5.0/stretch/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/slim/no-qt/Dockerfile))
 * `2.5.0-alpine`, `2.5-alpine`, `2-alpine`, `alpine` ([*2.5.0/stretch/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/Dockerfile))
 * `2.5.0-alpine-no-qt`, `2.5-alpine-no-qt`, `2-alpine-no-qt`, `alpine-no-qt` ([*2.5.0/alpine/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/alpine/no-qt/Dockerfile))
-* `2.4.2-jessie`, `2.4-jessie`, `2-jessie`, `jessie`, `2.4.2`, `2.4` ([*2.4/jessie/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/Dockerfile))
-* `2.4.2-jessie-no-qt`, `2.4-jessie-no-qt`, `2-jessie-no-qt`, `jessie-no-qt`, `2.4.2-no-qt`, `2.4-no-qt` ([*2.4/jessie/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/no-qt/Dockerfile))
-* `2.4.2-jessie-slim`, `2.4-jessie-slim`, `2-jessie-slim`, `jessie-slim`, `2.4.2-slim`, `2.4-slim` ([*2.4/jessie/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/Dockerfile))
-* `2.4.2-jessie-slim-no-qt`, `2.4-jessie-slim-no-qt`, `2-jessie-slim-no-qt`, `jessie-slim-no-qt`, `2.4.2-slim-no-qt`, `2.4-slim-no-qt` ([*2.4/jessie/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/no-qt/Dockerfile))
+* `2.4.2-jessie`, `2.4-jessie`, `2.4.2`, `2.4` ([*2.4/jessie/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/Dockerfile))
+* `2.4.2-jessie-no-qt`, `2.4-jessie-no-qt`, `2.4.2-no-qt`, `2.4-no-qt` ([*2.4/jessie/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/no-qt/Dockerfile))
+* `2.4.2-jessie-slim`, `2.4-jessie-slim`, `2.4.2-slim`, `2.4-slim` ([*2.4/jessie/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/Dockerfile))
+* `2.4.2-jessie-slim-no-qt`, `2.4-jessie-slim-no-qt`, `2.4.2-slim-no-qt`, `2.4-slim-no-qt` ([*2.4/jessie/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/no-qt/Dockerfile))
 
 The `*-no-qt` tags have no version of the Qt GUI libraries installed; those not so marked have Qt5 for (Debian) Stretch and Alpine, and Qt4 for (Debian) Jessie.
 
 There are no "slim" images for Alpine, as the entire point of Alpine is *to be a* minimal base distribution.
+
+Why no tags for, e.g., `2-jessie-slim`? The unadorned `2` implies that the tag is for the latest 2.*x* Ruby version; all Debian Jessie-based images are for the outdated 2.4.*x* (as of early January 2018, 2.4.2) release. It is possible that some such tags were created in error and not caught prior to release on Docker Hub; if you find one, please [open an issue](https://github.com/jdickey/docker-ruby/issues). *Thanks!*
 
 # Software
 
