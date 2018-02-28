@@ -1,8 +1,8 @@
 FROM jdickey/ruby:2.5.0-alpine-no-qt
 LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
-LABEL description="Base image for Ruby 2.5.0 on Alpine Linux, with PostgreSQL client and dev libraries, as well as NodeJS, with Qt and capybara-webkit"
+LABEL description="Base image for Ruby 2.5.0 on Alpine Linux, with NodeJS, Qt and capybara-webkit"
 LABEL includesQt=true
-LABEL version="0.9.0"
+LABEL version="0.10.0"
 RUN apk add --no-cache libxml2-dev \
                        libxslt-dev \
                        qt5-qtwebkit-dev \

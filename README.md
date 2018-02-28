@@ -27,10 +27,14 @@ I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/)
 * `2.5.0-stretch-slim-no-qt`, `2.5-stretch-slim-no-qt`, `2-stretch-slim-no-qt`, `stretch-slim-no-qt`, `2.5.0-slim-no-qt`, `2.5-slim-no-qt`, `2-slim-no-qt`, `slim-no-qt` ([*2.5.0/stretch/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/slim/no-qt/Dockerfile))
 * `2.5.0-alpine`, `2.5-alpine`, `2-alpine`, `alpine` ([*2.5.0/stretch/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/stretch/Dockerfile))
 * `2.5.0-alpine-no-qt`, `2.5-alpine-no-qt`, `2-alpine-no-qt`, `alpine-no-qt` ([*2.5.0/alpine/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.5.0/alpine/no-qt/Dockerfile))
-* `2.4.2-jessie`, `2.4-jessie`, `2.4.2`, `2.4` ([*2.4/jessie/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/Dockerfile))
-* `2.4.2-jessie-no-qt`, `2.4-jessie-no-qt`, `2.4.2-no-qt`, `2.4-no-qt` ([*2.4/jessie/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/no-qt/Dockerfile))
-* `2.4.2-jessie-slim`, `2.4-jessie-slim`, `2.4.2-slim`, `2.4-slim` ([*2.4/jessie/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/Dockerfile))
-* `2.4.2-jessie-slim-no-qt`, `2.4-jessie-slim-no-qt`, `2.4.2-slim-no-qt`, `2.4-slim-no-qt` ([*2.4/jessie/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/no-qt/Dockerfile))
+* `2.4.3-jessie`, `2.4-jessie`, `2.4.3`, `2.4` ([*2.4.3/jessie/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.3/jessie/Dockerfile))
+* `2.4.3-jessie-no-qt`, `2.4-jessie-no-qt`, `2.4.3-no-qt`, `2.4-no-qt` ([*2.4.3/jessie/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.3/jessie/no-qt/Dockerfile))
+* `2.4.3-jessie-slim`, `2.4-jessie-slim`, `2.4.3-slim`, `2.4-slim` ([*2.4.3/jessie/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.3/jessie/slim/Dockerfile))
+* `2.4.3-jessie-slim-no-qt`, `2.4-jessie-slim-no-qt`, `2.4.3-slim-no-qt`, `2.4-slim-no-qt` ([*2.4.3/jessie/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.3/jessie/slim/no-qt/Dockerfile))
+* `2.4.2-jessie`, `2.4.2` ([*2.4.2/jessie/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.2/jessie/Dockerfile))
+* `2.4.2-jessie-no-qt`, `2.4.2-no-qt` ([*2.4.2/jessie/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.2/jessie/no-qt/Dockerfile))
+* `2.4.2-jessie-slim`, `2.4.2-slim` ([*2.4.2/jessie/slim/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4.3/jessie/slim/Dockerfile))
+* `2.4.2-jessie-slim-no-qt`, `2.4.2-slim-no-qt` ([*2.4.2/jessie/slim/no-qt/Dockerfile*](https://github.com/jdickey/docker-ruby/blob/master/2.4/jessie/slim/no-qt/Dockerfile))
 
 The `*-no-qt` tags have no version of the Qt GUI libraries installed; those not so marked have Qt5 for (Debian) Stretch and Alpine, and Qt4 for (Debian) Jessie.
 
@@ -48,11 +52,9 @@ The following Debian packages are installed in Debian-based images of this repo:
 
 * `build-essential`
 * `curl`
-* `libpq-dev`
 * `libxml2-dev`
 * `libxslt1-dev`
 * `nodejs`
-* `postgresql-client`
 * `sudo`
 * `wget`
 * `zsh`
@@ -82,8 +84,6 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 * `bash`
 * `build-base`
 * `nodejs`
-* `postgresql-client`
-* `postgresql-dev`
 * `tzdata`
 * `zsh`
 
