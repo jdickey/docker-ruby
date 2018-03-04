@@ -1,0 +1,26 @@
+# Bogus default values intended to force legit CLI argument use
+ARG RUBY_VERSION=99.99.999
+# e.g., '0.11.0'
+ARG VERSION='NOT SET FROM CLI INVOCATION'
+
+# e.g. --build-arg RUBY_EXTRA='-slim-jessie'
+ARG RUBY_EXTRA=''
+FROM jdickey/ruby:${RUBY_VERSION}${RUBY_EXTRA}-no-qt
+
+ARG RUBY_VERSION
+ARG RUBY_EXTRA
+ARG VERSION
+# should be 'libqt4-webkit libqt4-dev qt4-qmake' for Qt4; 'libqtwebkit-dev qt5-qmake' for Qt5 (both Debian)
+ARG QTLIBS="shouldbe-libqt4-webkit shouldbe-libqt4-dev shouldbe-qt4-qmake"
+
+ENV LANG en_US.UTF-8
+ENV LC_ALL C
+LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
+LABEL description="Base image for ${RUBY_VERSION}${RUBY_EXTRA} with Qt and capybara-webkit"
+LABEL includesQt=true
+LABEL version="${VERSION}"
+
+RUN apt-get update -qq && \
+    apt-get install -y $QTLIBS libxml2-dev libxslt1-dev xvfb && \
+    apt-get clean && find /var/lib/apt/lists/* -delete
+RUN gem install capybara-webkit && gem update && gem update --system && gem cleanup
