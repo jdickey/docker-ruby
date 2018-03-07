@@ -1,32 +1,33 @@
 #!/bin/bash
 
+export VERSION=0.11.1
 ###
 ### 2.5.0 on Debian Stretch
 ###
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg VERSION=0.11.0 \
+             --build-arg VERSION=$VERSION \
              --tag 'jdickey/ruby:2.5.0-stretch-no-qt' \
              --squash --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-stretch' \
              --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
-             --build-arg VERSION=0.11.0 \
+             --build-arg VERSION=$VERSION \
              --tag 'jdickey/ruby:2.5.0-stretch' \
              --squash --file Dockerfile.main.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg VERSION=0.11.0 \
+             --build-arg VERSION=$VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch-no-qt' \
              --squash --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
-             --build-arg VERSION=0.11.0 \
+             --build-arg VERSION=$VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch' \
              --squash --file Dockerfile.main.debian .
 
@@ -78,11 +79,13 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
              --tag 'jdickey/ruby:2.5.0-alpine3.7' \
              --squash --file Dockerfile.main.alpine .
 
+docker tag jdickey/ruby:2.5.0-alpine3.7-no-qt jdickey/ruby:2.5.0-alpine37-no-qt
 docker tag jdickey/ruby:2.5.0-alpine3.7-no-qt jdickey/ruby:2.5.0-alpine-no-qt
 docker tag jdickey/ruby:2.5.0-alpine-no-qt jdickey/ruby:2.5-alpine-no-qt
 docker tag jdickey/ruby:2.5.0-alpine-no-qt jdickey/ruby:2-alpine-no-qt
 docker tag jdickey/ruby:2.5.0-alpine-no-qt jdickey/ruby:alpine-no-qt
 
+docker tag jdickey/ruby:2.5.0-alpine3.7 jdickey/ruby:jdickey/ruby:2.5.0-alpine37
 docker tag jdickey/ruby:2.5.0-alpine3.7 jdickey/ruby:2.5.0-alpine
 docker tag jdickey/ruby:2.5.0-alpine jdickey/ruby:2.5-alpine
 docker tag jdickey/ruby:2.5.0-alpine jdickey/ruby:2-alpine
@@ -214,7 +217,8 @@ docker tag jdickey/ruby:2.4.2-slim jdickey/ruby:slim-jessie
 ### Fin
 ###
 
-docker image ls --format '{{.ID}}\t{{.Tag}}' | grep none | cut -f 1 | xargs docker image rm
+echo -n "Temporary images deleted: "
+(docker image ls --format '{{.ID}}\t{{.Tag}}' | grep none | cut -f 1 | xargs docker image rm ) | wc -l
 
 echo 'All images created and tagged.'
 echo "Use 'docker image ls jdickey/ruby' to see a complete list."

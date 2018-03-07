@@ -100,6 +100,11 @@ The following Alpine packages are installed in Alpine images not tagged `no-qt` 
 
 # Changelog
 
+## 0.11.1 (7 March 2018)
+
+* Added `2.5.0-alpine37` as synonymous tag for `2.5.0-alpine-3.7`
+* Added `2.5.0-alpine37-no-qt-` as synonymous tag for `2.5.0-alpine-3.7-no-qt`
+
 ## 0.11.0 (4 March 2018)
 
 * **BREAKING CHANGE:** Slim images now named consistently with corresponding official Ruby images; e.g., rather than `2.5.0-stretch-slim`, that image is now tagged `2.5.0-slim-stretch`
