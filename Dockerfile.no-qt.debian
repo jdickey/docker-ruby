@@ -17,7 +17,7 @@ LABEL description="Base image for ${RUBY_VERSION}${RUBY_EXTRA}, with NodeJS, but
 LABEL includesQt=false
 LABEL version="${VERSION}"
 
-RUN apt-get update -qq && \
+RUN apt-get update -qq && apt-get dist-upgrade -y && \
     apt-get install -y build-essential curl less nodejs sudo wget zsh \
     && apt-get clean && find /var/lib/apt/lists/* -delete
 RUN gem install yard && yard config --gem-install-yri \
