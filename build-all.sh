@@ -52,7 +52,8 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -65,7 +66,8 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-slim-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -82,7 +84,8 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -95,7 +98,8 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -146,7 +150,8 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -159,7 +164,8 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg QTLIBS="libqtwebkit-dev qt5-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -176,7 +182,8 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg QTLIBS="libqt4-webkit libqt4-dev qt4-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -189,7 +196,8 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg QTLIBS="libqt4-webkit libqt4-dev qt4-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -224,7 +232,8 @@ docker build --build-arg RUBY_VERSION=2.4.3 \
 
 docker build --build-arg RUBY_VERSION=2.4.3 \
              --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg QTLIBS="libqt4-webkit libqt4-dev qt4-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.3-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -237,7 +246,8 @@ docker build --build-arg RUBY_VERSION=2.4.3 \
 
 docker build --build-arg RUBY_VERSION=2.4.3 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg QTLIBS="libqt4-webkit libqt4-dev qt4-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.3-slim-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -271,7 +281,8 @@ docker build --build-arg RUBY_VERSION=2.4.2 \
 
 docker build --build-arg RUBY_VERSION=2.4.2 \
              --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg QTLIBS="libqt4-webkit libqt4-dev qt4-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.2-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -284,7 +295,8 @@ docker build --build-arg RUBY_VERSION=2.4.2 \
 
 docker build --build-arg RUBY_VERSION=2.4.2 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg QTLIBS="libqt4-webkit libqt4-dev qt4-qmake" \
+             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
+             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.2-slim-jessie' \
              --squash --file Dockerfile.main.debian .

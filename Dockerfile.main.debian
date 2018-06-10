@@ -7,10 +7,12 @@ ARG VERSION='NOT SET FROM CLI INVOCATION'
 ARG RUBY_EXTRA=''
 FROM jdickey/ruby:${RUBY_VERSION}${RUBY_EXTRA}-no-qt
 
+# should be '/usr/lib/x86_64-linux-gnu/qt5/bin/qmake' for Qt5; '/usr/local/lib/qt4/bin/qmake' for Qt4
+ARG QMAKE_PATH
 ARG RUBY_VERSION
 ARG RUBY_EXTRA
 ARG VERSION
-# should be 'libqt4-webkit libqt4-dev qt4-qmake' for Qt4; 'libqtwebkit-dev qt5-qmake' for Qt5 (both Debian)
+# should be 'libqt4-webkit libqt4-dev qt4-qmake' for Qt4; 'libqt5webkit5-dev qt5-qmake' for Qt5 (both Debian)
 ARG QTLIBS="shouldbe-libqt4-webkit shouldbe-libqt4-dev shouldbe-qt4-qmake"
 
 ENV LANG en_US.UTF-8
@@ -23,4 +25,4 @@ LABEL version="${VERSION}"
 RUN apt-get update -qq && apt-get dist-upgrade -y && \
     apt-get install -y $QTLIBS libxml2-dev libxslt1-dev xvfb && \
     apt-get clean && find /var/lib/apt/lists/* -delete
-RUN gem install capybara-webkit && gem update && gem update --system && gem cleanup
+RUN QMAKE=${QMAKE_PATH} gem install capybara-webkit && gem update && gem update --system && gem cleanup
