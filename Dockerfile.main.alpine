@@ -7,8 +7,6 @@ ARG VERSION='NOT SET FROM CLI INVOCATION'
 ARG RUBY_EXTRA=''
 FROM jdickey/ruby:${RUBY_VERSION}-alpine${RUBY_EXTRA}-no-qt
 
-# should be 'libqt4-webkit libqt4-dev' for Qt4; 'qt5-qtwebkit-dev' for Qt5 (both Alpine)
-ARG QTLIBS='shouldbe-qt5-qtwebkit-dev shouldbe-qt5-qmake'
 ARG RUBY_VERSION
 ARG RUBY_EXTRA
 ARG VERSION
@@ -20,6 +18,6 @@ LABEL description="Base image for ${RUBY_VERSION}alpine-${RUBY_EXTRA} with Qt an
 LABEL includesQt=true
 LABEL version="${VERSION}"
 
-RUN apk add --no-cache libxml2-dev libxslt-dev $QTLIBS xvfb
+RUN apk add --no-cache libxml2-dev libxslt-dev qt5-qtwebkit-dev xvfb
 RUN QMAKE=/usr/lib/qt5/bin/qmake gem install capybara-webkit && \
     gem update && gem update --system && gem cleanup

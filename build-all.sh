@@ -37,6 +37,7 @@ if [[ -z "${DOCKER_RUBY_VERSION}" ]]; then
   echo You MUST define the DOCKER_RUBY_VERSION environment variable when using this script.
   echo It will be encoded into the built images as a version ID.
   echo Example usage: DOCKER_RUBY_VERSION=0.27.0 bash ./build_all.sh
+  sleep 3
   return 1
 fi
 
@@ -52,8 +53,6 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -66,11 +65,10 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-slim-stretch' \
              --squash --file Dockerfile.main.debian .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.5.0 on Debian Stretch
@@ -84,8 +82,6 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -98,11 +94,10 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch' \
              --squash --file Dockerfile.main.debian .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.5.1 on Alpine 3.7
@@ -117,9 +112,9 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --build-arg QTLIBS=qt5-qtwebkit-dev \
              --tag 'jdickey/ruby:2.5.1-alpine3.7' \
              --squash --file Dockerfile.main.alpine .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.5.0 on Alpine 3.7
@@ -134,9 +129,9 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --build-arg QTLIBS=qt5-qtwebkit-dev \
              --tag 'jdickey/ruby:2.5.0-alpine3.7' \
              --squash --file Dockerfile.main.alpine .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.4.4 on Debian Stretch
@@ -150,8 +145,6 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-stretch' \
              --squash --file Dockerfile.main.debian .
@@ -164,11 +157,10 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-stretch' \
              --squash --file Dockerfile.main.debian .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.4.4 on Debian Jessie
@@ -182,8 +174,6 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -196,11 +186,10 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-jessie' \
              --squash --file Dockerfile.main.debian .
+docker container prune -f && docker image prune -f
 
 
 ###
@@ -216,9 +205,9 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --build-arg QTLIBS=qt5-qtwebkit-dev \
              --tag 'jdickey/ruby:2.4.4-alpine3.7' \
              --squash --file Dockerfile.main.alpine .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.4.3 on Debian Jessie
@@ -232,8 +221,6 @@ docker build --build-arg RUBY_VERSION=2.4.3 \
 
 docker build --build-arg RUBY_VERSION=2.4.3 \
              --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.3-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -246,11 +233,10 @@ docker build --build-arg RUBY_VERSION=2.4.3 \
 
 docker build --build-arg RUBY_VERSION=2.4.3 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.3-slim-jessie' \
              --squash --file Dockerfile.main.debian .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.4.3 on Alpine 3.7
@@ -265,9 +251,9 @@ docker build --build-arg RUBY_VERSION=2.4.3 \
 docker build --build-arg RUBY_VERSION=2.4.3 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --build-arg QTLIBS=qt5-qtwebkit-dev \
              --tag 'jdickey/ruby:2.4.3-alpine3.7' \
              --squash --file Dockerfile.main.alpine .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.4.2 on Debian Jessie
@@ -281,8 +267,6 @@ docker build --build-arg RUBY_VERSION=2.4.2 \
 
 docker build --build-arg RUBY_VERSION=2.4.2 \
              --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.2-jessie' \
              --squash --file Dockerfile.main.debian .
@@ -295,11 +279,10 @@ docker build --build-arg RUBY_VERSION=2.4.2 \
 
 docker build --build-arg RUBY_VERSION=2.4.2 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg QTLIBS="libqt5webkit5-dev qt5-qmake" \
-             --build-arg QMAKE_PATH="/usr/lib/x86_64-linux-gnu/qt5/bin/qmake" \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.2-slim-jessie' \
              --squash --file Dockerfile.main.debian .
+docker container prune -f && docker image prune -f
 
 ###
 ### 2.4.2 on Alpine 3.7
@@ -314,9 +297,9 @@ docker build --build-arg RUBY_VERSION=2.4.2 \
 docker build --build-arg RUBY_VERSION=2.4.2 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --build-arg QTLIBS=qt5-qtwebkit-dev \
              --tag 'jdickey/ruby:2.4.2-alpine3.7' \
              --squash --file Dockerfile.main.alpine .
+docker container prune -f && docker image prune -f
 
 ###
 ### Version tags
@@ -329,12 +312,6 @@ echo "Done!"
 ###
 ### Fin
 ###
-
-
-echo -n 'Failed containers deleted: '
-docker container prune -f | grep 'deleted:' | wc -l
-echo -n "Temporary images deleted: "
-docker image prune -f | grep 'deleted:' | wc -l
 
 echo 'All images created and tagged.'
 echo "Use 'docker image ls jdickey/ruby' to see a complete list."
