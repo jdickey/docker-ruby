@@ -34,10 +34,10 @@ class BuildImageList
 
   def initialize(yaml_file)
     image_config_data = YAML.load_file(yaml_file)
-    @builds = image_config_data['builds']
-    @hanami_version =image_config_data['metadata']['hanami_version']
-    @hanami_model_version =image_config_data['metadata']['hanami_model_version']
-    @image_version = image_config_data['metadata']['image_version']
+    @builds = image_config_data['data']['builds']
+    @hanami_version = image_config_data['data']['metadata']['hanami_version']
+    @hanami_model_version =image_config_data['data']['metadata']['hanami_model_version']
+    @image_version = image_config_data['data']['metadata']['image_version']
   end
 
   private

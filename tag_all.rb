@@ -1,18 +1,20 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'ostruct'
 require 'yaml'
 require 'docker'
-require_relative './build-image'
-require_relative './build_image_list'
 
-images = BuildImageList.call(yaml_file: './builds.yml');
+data = YAML.load_file('builds.yml')
+builds = data['data']['builds']
+repo_name = 'jdickey/ruby'
 
-images.each do |image_name, image_list_item|
-  repo_name = 'jdickey/ruby'
-  full_name = [repo_name, image_name].join(':')
-  image = Docker::Image.get(full_name)
-  image_list_item.tags.map { |tag| image.tag repo: repo_name, tag: tag }
-  image.tag(repo: repo_name, tag: 'latest') if image_list_item.latest?
+builds.map do |version_id, version_data|
+  version_data.map do |os_id, os_data|
+    os_data.map do |build_id, build_data|
+      image_name = "#{repo_name}:#{version_id}-#{os_id}"
+      image_name += '-no-qt' if build_id == 'no-qt'
+      image = Docker::Image.get(image_name)
+      build_data['tags'].map { |tag| image.tag(repo: repo_name, tag: tag) }
+    end
+  end
 end

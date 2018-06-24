@@ -1,0 +1,13 @@
+#!/bin/bash
+rbenv gemset delete 2.5 ./tmp/gemset
+rm -rf tmp .rbenv-gemsets
+mkdir -p tmp/gemset
+# touch tmp/.gitkeep
+# git add -f ./tmp/.gitkeep
+rbenv gemset create 2.5 ./tmp/gemset
+echo ./tmp/gemset > .rbenv-gemsets
+rbenv rehash
+gem install yard
+yard config --gem-install-yri
+gem install docker-api minitest pry-byebug
+rbenv rehash

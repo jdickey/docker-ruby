@@ -148,7 +148,7 @@ class DockerfileBuilder
   end
 
   def from_image
-    ['FROM', config.base_image_spec].join(' ') + "\n"
+    "FROM ruby:#{config.base_image_spec}\n"
   end
 
   def initial_env
