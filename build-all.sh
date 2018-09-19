@@ -49,25 +49,25 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
             --build-arg RUBY_EXTRA='-stretch' \
             --build-arg VERSION=$DOCKER_RUBY_VERSION \
             --tag 'jdickey/ruby:2.5.1-stretch-no-qt' \
-            --squash --file Dockerfile.no-qt.debian .
+            --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-stretch' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-slim-stretch-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
+             --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-slim-stretch' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
 
 ###
@@ -78,25 +78,25 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
             --build-arg RUBY_EXTRA='-stretch' \
             --build-arg VERSION=$DOCKER_RUBY_VERSION \
             --tag 'jdickey/ruby:2.5.0-stretch-no-qt' \
-            --squash --file Dockerfile.no-qt.debian .
+            --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-stretch' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
+             --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
 
 ###
@@ -107,13 +107,13 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-alpine3.7-no-qt' \
-             --squash --file Dockerfile.no-qt.alpine .
+             --squash --compress --file Dockerfile.no-qt.alpine .
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.1-alpine3.7' \
-             --squash --file Dockerfile.main.alpine .
+             --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
 
 ###
@@ -124,13 +124,13 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-alpine3.7-no-qt' \
-             --squash --file Dockerfile.no-qt.alpine .
+             --squash --compress --file Dockerfile.no-qt.alpine .
 
 docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-alpine3.7' \
-             --squash --file Dockerfile.main.alpine .
+             --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
 
 ###
@@ -141,25 +141,25 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-stretch-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
+             --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-stretch' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-stretch-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
+             --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-stretch' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-stretch' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
 
 ###
@@ -170,25 +170,25 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-jessie' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-jessie-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
+             --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-jessie' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-jessie' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-jessie-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
+             --squash --compress --file Dockerfile.no-qt.debian .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='-slim-jessie' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-slim-jessie' \
-             --squash --file Dockerfile.main.debian .
+             --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
 
 
@@ -200,105 +200,13 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-alpine3.7-no-qt' \
-             --squash --file Dockerfile.no-qt.alpine .
+             --squash --compress --file Dockerfile.no-qt.alpine .
 
 docker build --build-arg RUBY_VERSION=2.4.4 \
              --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.4.4-alpine3.7' \
-             --squash --file Dockerfile.main.alpine .
-docker container prune -f && docker image prune -f
-
-###
-### 2.4.3 on Debian Jessie
-###
-
-docker build --build-arg RUBY_VERSION=2.4.3 \
-             --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.3-jessie-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.3 \
-             --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.3-jessie' \
-             --squash --file Dockerfile.main.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.3 \
-             --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.3-slim-jessie-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.3 \
-             --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.3-slim-jessie' \
-             --squash --file Dockerfile.main.debian .
-docker container prune -f && docker image prune -f
-
-###
-### 2.4.3 on Alpine 3.7
-###
-
-docker build --build-arg RUBY_VERSION=2.4.3 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.3-alpine3.7-no-qt' \
-             --squash --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.4.3 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.3-alpine3.7' \
-             --squash --file Dockerfile.main.alpine .
-docker container prune -f && docker image prune -f
-
-###
-### 2.4.2 on Debian Jessie
-###
-
-docker build --build-arg RUBY_VERSION=2.4.2 \
-             --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.2-jessie-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.2 \
-             --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.2-jessie' \
-             --squash --file Dockerfile.main.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.2 \
-             --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.2-slim-jessie-no-qt' \
-             --squash --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.2 \
-             --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.2-slim-jessie' \
-             --squash --file Dockerfile.main.debian .
-docker container prune -f && docker image prune -f
-
-###
-### 2.4.2 on Alpine 3.7
-###
-
-docker build --build-arg RUBY_VERSION=2.4.2 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.2-alpine3.7-no-qt' \
-             --squash --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.4.2 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.2-alpine3.7' \
-             --squash --file Dockerfile.main.alpine .
+             --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
 
 ###

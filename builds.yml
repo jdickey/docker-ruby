@@ -1,6 +1,6 @@
 data:
   metadata:
-    image_version: 0.13.1
+    image_version: 0.13.2
   builds:
     2.5.1:
       stretch:
@@ -130,51 +130,3 @@ data:
             - 2.4-alpine3.7
             - 2.4-alpine37
             - 2.4-alpine
-    2.4.3:
-      jessie:
-        no-qt:
-          tags:
-            - 2.4.3-no-qt
-        qt:
-          tags:
-            - '2.4.3'
-      slim-jessie:
-        no-qt:
-          tags:
-            - 2.4.3-slim-no-qt
-        qt:
-          tags:
-            - 2.4.3-slim
-      alpine3.7:
-        no-qt:
-          tags:
-            - 2.4.3-alpine37-no-qt
-            - 2.4.3-alpine-no-qt
-        qt:
-          tags:
-            - 2.4.3-alpine37
-            - 2.4.3-alpine
-    2.4.2:
-      jessie:
-        no-qt:
-          tags:
-            - 2.4.2-no-qt
-        qt:
-          tags:
-            - '2.4.2'
-      slim-jessie:
-        no-qt:
-          tags:
-            - 2.4.2-slim-no-qt
-        qt:
-          tags:
-            - 2.4.2-slim
-      alpine3.7:
-        no-qt:
-          tags:
-            - 2.4.2-alpine37-no-qt
-            - 2.4.2-alpine-no-qt
-        qt:
-          tags:
-            - 2.4.2-alpine37
-            - 2.4.2-alpine

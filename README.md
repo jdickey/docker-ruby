@@ -2,60 +2,55 @@
 
 # Contents
 
-- [Overview](#overview)
-  * [IMPORTANT NOTES for Image Prior To Version 0.13.0](#important-notes-for-image-prior-to-version-0130)
-  * [DEPRECATION NOTICE for Ruby Versions Prior to 2.4.4](#deprecation-notice-for-ruby-versions-prior-to-244)
+* [Overview](#overview)
+  * [IMPORTANT NOTES for Image Prior To Version 0\.13\.0](#important-notes-for-image-prior-to-version-0130)
   * [Supported Tags](#supported-tags)
-    + [Logical but Nonexistent Tags](#logical-but-nonexistent-tags)
-    + [What? No Dockerfiles?](#what-no-dockerfiles)
-- [Software](#software)
-  * [Debian Stretch or Jessie](#debian-stretch-or-jessie)
-    + [Base Software](#base-software)
-    + [Qt5 Software](#qt5-software)
+    * [Logical but Nonexistent Tags](#logical-but-nonexistent-tags)
+    * [What? No Dockerfiles?](#what-no-dockerfiles)
+* [Software](#software)
+  * [Debian Stretch](#debian-stretch)
+    * [Base Software](#base-software)
+    * [Qt5 Software](#qt5-software)
   * [Alpine Linux](#alpine-linux)
-    + [Base Software](#base-software-1)
-    + [Qt5 Software](#qt5-software-1)
-- [Changelog](#changelog)
-  * [0.13.0 (11 June 2018)](#0130-11-june-2018)
-  * [0.12.0 (11 April 2018) WITHDRAWN &mdash; DO NOT USE](#0120-11-april-2018-withdrawn-mdash-do-not-use)
-  * [0.11.2 (15 March 2018)](#0112-15-march-2018)
-  * [0.11.1 (7 March 2018)](#0111-7-march-2018)
-  * [0.11.0 (4 March 2018)](#0110-4-march-2018)
-  * [0.10.0 (1 March 2018)](#0100-1-march-2018)
-  * [0.9.0 (11 January 2018)](#090-11-january-2018)
-  * [0.8.0 (8 January 2018)](#080-8-january-2018)
-  * [0.7.0 (17 November 2017)](#070-17-november-2017)
-- [Additional Documentation](#additional-documentation)
-- [Legal](#legal)
+    * [Base Software](#base-software-1)
+    * [Qt5 Software](#qt5-software-1)
+* [Changelog](#changelog)
+  * [0\.13\.2 (20 September 2018)](#0132-20-september-2018)
+  * [0\.13\.1 (24 June 2018)](#0131-24-june-2018)
+  * [0\.13\.0 (11 June 2018)](#0130-11-june-2018)
+  * [0\.12\.0 (11 April 2018) WITHDRAWN — DO NOT USE](#0120-11-april-2018-withdrawn--do-not-use)
+  * [0\.11\.2 (15 March 2018)](#0112-15-march-2018)
+  * [0\.11\.1 (7 March 2018)](#0111-7-march-2018)
+  * [0\.11\.0 (4 March 2018)](#0110-4-march-2018)
+  * [0\.10\.0 (1 March 2018)](#0100-1-march-2018)
+  * [0\.9\.0 (11 January 2018)](#090-11-january-2018)
+  * [0\.8\.0 (8 January 2018)](#080-8-january-2018)
+  * [0\.7\.0 (17 November 2017)](#070-17-november-2017)
+* [Additional Documentation](#additional-documentation)
+* [Legal](#legal)
 
 # Overview
 
-I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/), install additional software packages, and do some basic Ruby housekeeping (installing Bundler and making sure the system Gems are up-to-date). Building against [`2.4.2-jessie`](https://github.com/docker-library/ruby/blob/73d3ed6b06738a7457a24fba9024cad303829c0a/2.4/jessie/Dockerfile) on a 2011 iMac and a decent Net connection, this can take about *20 minutes.* Repeat this half-a-dozen times over the course of a day and you've lost two hours. As Orwell wrote, *doubleplus ungood.*
+I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/), install additional software packages, and do some basic Ruby housekeeping (installing Bundler and making sure the system Gems are up-to-date). On a reasonably modern iMac with a decent First World internet connection, this can take about *20 minutes.* Repeat this half-a-dozen times over the course of a day and you've lost two hours. As Orwell wrote, *doubleplus ungood.*
 
 ## IMPORTANT NOTES for Image Prior To Version 0.13.0
 
 Basically, *please do not use them.* Rebuild any of your images using `jdickey/ruby` as a base using the current-at-the-time-of-writing Version 0.13.0 or later. The Alpine images are believed to be OK, but the Debian images, even those claiming to support Qt5, in fact have a mixture of Qt4 and Qt5 which causes several versions of `capybara-webkit` to have Issues, and which imminent future versions of `capybara-webkit` will not support, as they've officially deprecated Qt4. To find which version of the image you're working with, run the command line `docker inspect jdickey/ruby:2.5.1 | grep '"version"'`, substituting the tag of the image you are actually using if not `2.5.1`.
 
-## DEPRECATION NOTICE for Ruby Versions Prior to 2.4.4
-
-Notice is hereby served that the first version of these images released after 11 September 2018, 3 months from the release of Version 0.13.0, will contain **no** images for Ruby versions `2.4.2` or `2.4.3`. Please upgrade your Ruby version using appropriate images, as the affected Ruby versions presently supported by these images are no longer receiving official support from ruby-lang.org.
-
 ## Supported Tags
 
 Each image has one tag that follows the format `2.x.y-os_build[-no-qt]`, where
 
-1. `2.x.y` is the full version number of the Ruby version hosted by the image, which will be one of `2.5.1` (the current version), `2.5.0`, `2.4.4`, `2.4.3`, or `2.4.2`;
+1. `2.x.y` is the full version number of the Ruby version hosted by the image, which will be one of `2.5.1` (the current version), `2.5.0`, or `2.4.4`;
 2. `os_build` identifies which OS and variant the image was based on. These can be any one of
-	1. `jessie`: Debian [Jessie](https://en.wikipedia.org/wiki/Debian#Code_names) (8.0);
-	2. `slim-jessie`: A "slim" version of Jessie, containing fewer packages by default (and thus with a considerably smaller image size);
-	3. `stretch`: Debian [Stretch](https://en.wikipedia.org/wiki/Debian#Code_names) (9.0);
-	4. `stretch-slim`: A "slim" version of Stretch;
-	5. `alpine3.7` (synonyms: `alpine37` and `alpine`): Alpine Linux 3.7, a minimalist Linux distribution. (There is no 'slim' version of `alpine`; it's already the smallest of the listed images);
+	1. `stretch`: Debian [Stretch](https://en.wikipedia.org/wiki/Debian#Code_names) (9.0);
+	2. `stretch-slim`: A "slim" version of Stretch;
+	3. `alpine3.7` (synonyms: `alpine37` and `alpine`): Alpine Linux 3.7, a minimalist Linux distribution. (There is no 'slim' version of `alpine`; it's already the smallest of the listed images);
 3. The suffix `-no-qt` indicates that the image has been built *without* the Qt OS-level libraries and tools needed to run the [Capybara](https://teamcapybara.github.io/capybara/) test framework (and thus does not include Capybara itself or the `capybara-webkit` headless browser).
 
 The `latest` tag identifies the latest version of Ruby (as of June 2018, version 2.5.1) on the latest, non-`slim` version of Debian (currently `stretch`), built *with* the Qt and Capybara tools. It should be the default choice when you simply want the most recent supported Ruby version, but is not recommended for production use in most cases. (We recommend exploring basing your image on an `alpine` and `-no-qt` build for production.)
 
-Minor-version tags such as `2.4-jessie` or `2.5-alpine-no-qt` identify the latest supported release of that minor version of Ruby on the specified OS build. As later versions of Ruby are released and supported (e.g., a hypothetical 2.4.5 or 2.5.2), the corresponding minor-version tag will be redefined to match the new full-version-number tag.
+Minor-version tags such as `2.4-stretch` or `2.5-alpine-no-qt` identify the latest supported release of that minor version of Ruby on the specified OS build. As later versions of Ruby are released and supported (e.g., a hypothetical 2.4.5 or 2.5.2), the corresponding minor-version tag will be redefined to match the new full-version-number tag.
 
 Major-version tags (e.g., `2-stretch` or `2-alpine3.7`) identify the latest supported minor release of the latest supported major release of Ruby (currently `2.5.1`), and are updated in a manner analogous to minor-version tags; i.e., when Ruby 2.6 is released (expected to be in December, 2018), each major-version tag will be updated to match `2.6.0` on each respective operating system (e.g., `2.6.0-stretch`).
 
@@ -65,7 +60,7 @@ Finally, the Alpine Linux OS build names differ from the Debian conventions in t
 
 ### Logical but Nonexistent Tags
 
-Why no tags for, e.g., `2-slim-jessie`? We use tag names intended to be consistent with those of the [official Ruby Docker images](https://hub.docker.com/_/ruby/); the unadorned `2` states that the tag is for the latest 2.*x* Ruby version. No Debian Jessie-based images exist for Ruby versions later than the outdated 2.4.*x* (as of June 2018, 2.4.4) release. It is possible that some such tags were created in error and not caught prior to release on Docker Hub; if you find one, please [open an issue](https://github.com/jdickey/docker-ruby/issues). *Thanks!*
+Why no tags for, e.g., `2-slim-jessie`? First, support for Jessie is dead; as of September, 2018, all Debian builds are on Stretch. We use tag names intended to be consistent with those of the [official Ruby Docker images](https://hub.docker.com/_/ruby/); the unadorned `2` states that the tag is for the latest 2.*x* Ruby version. No Debian Jessie-based images should exist for any Ruby version. It is possible that some such tags were created in error and not caught prior to release on Docker Hub; if you find one, please [open an issue](https://github.com/jdickey/docker-ruby/issues). *Thanks!*
 
 ### What? No Dockerfiles?
 
@@ -78,9 +73,9 @@ Versions of these images prior to [Release 0.11.0](#changelog) published `Docker
 
 # Software
 
-## Debian Stretch or Jessie
+## Debian Stretch
 
-Note that we *recommend* use of Stretch over Jessie where practical. Support for Jessie is likely to be discontinued at a future date when Stretch will still be supported.
+Jessie is dead; long live Stretch! Ancient, now-unsupported upstream official Ruby images were based on Debian Jessie; as of Version 0.13.2 of these images, we no longer build Ruby images based on no-longer-supported Ruby versions (2.4.3 and earlier).
 
 ### Base Software
 
@@ -127,6 +122,14 @@ The following Alpine packages are installed in Alpine images not tagged `no-qt` 
 * `xvfb`
 
 # Changelog
+
+## 0.13.2 (20 September 2018)
+
+* Ruby versions prior to 2.4.4 are *no longer built as images*. Consequently, all upstream images based on Debian support Stretch, and so all Jessie builds (as well as Alpine builds of Ruby versions prior to 2.4.4) have been dropped.
+
+## 0.13.1 (24 June 2018)
+
+* Ruby <= 2.4.4 on Debian Jessie fixed upstream (but still to be removed on or after 11 September 2018).
 
 ## 0.13.0 (11 June 2018)
 
