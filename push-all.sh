@@ -5,7 +5,7 @@ for i in 5 4 3 2 1; do
   echo -n $i; echo -n '... '
   sleep 1
 done
-for i in `docker image ls jdickey/ruby --format='{{.Repository}}:{{.Tag}}' | sort`; do
+for i in `docker image ls jdickey/ruby --format '{{.ID}} {{.Repository}}:{{.Tag}}' | sort | cut -f 2 -d ' '`; do
   echo "Pushing $i"
   docker push $i
   echo "Done pushing $i"; echo
