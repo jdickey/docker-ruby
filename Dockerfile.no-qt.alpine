@@ -17,6 +17,6 @@ LABEL description="Base image for ${RUBY_VERSION}alpine-${RUBY_EXTRA}, with Node
 LABEL includesQt=false
 LABEL version="${VERSION}"
 
-RUN apk add --no-cache alpine-sdk bash build-base nodejs tzdata zsh
+RUN apk add --no-cache alpine-sdk bash build-base libressl-dev nodejs tzdata zsh
 RUN gem install yard && yard config --gem-install-yri \
-    && gem update --system && gem update && gem cleanup
+    && gem install bundler && gem update --system && gem update && gem cleanup

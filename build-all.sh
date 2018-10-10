@@ -5,32 +5,32 @@ set -euo pipefail
 #
 # 1. Each image **should** have one fully-qualified tag; i.e., it contains the
 #    full Ruby version number included in the image; identifies the OS it was
-#    built with (currently Debian 'stretch' or 'jessie', or 'alpine-3.7'); *and*
-#    whether or not it contains Qt/Capybara support (where '-no-qt` indicates
-#    that it does not, but see Rule 3).
+#    built with (currently Debian 'stretch' or 'alpine-3.7'); *and* whether or
+#    not it contains Qt/Capybara support (where '-no-qt` indicates that it does
+#    not, but see Rule 3).
 # 2. The fully-qualified tag mentioned in Rule 1 **may optionally** be the tag
 #    initially assigned to the image when it was built.
 # 3. An image tag *not* containing either the '-qt' or '-no-qt' indicators
 #    **must** be interpreted as the otherwise-equivalent '-qt' image. The
 #    explicit tagging of that image with an explicit '-qt' tag is *optional*.
 # 4. An image tag without an OS identifier *must be* built on the official
-#    Debian OS used for the upstream image: 'jessie' for 2.4.x and earlier, or
-#    'stretch' for 2.5.0 and later.
+#    Debian OS used for the upstream image (currently 'stretch'; 'jessie' is no
+#    longer supported by these images).
 # 5. An image tag containing a _partial_ version number, such as '2-alpine'
-#    or '2.4-jessie-no-qt', **must** be synonymous with the _latest_ matching
+#    or '2.4-stretch-no-qt', **must** be synonymous with the _latest_ matching
 #    version at the time the image was built. As of April 2018, for the examples
-#    given, those would be '2.5.1-alpine-qt' and '2.4.4-jessie-no-qt',
+#    given, those would be '2.5.1-alpine-qt' and '2.4.4-stretch-no-qt',
 #    respectively.
 # 6. An image tag containing *no* Ruby version number *must* match the _latest
 #    version of Ruby packaged in the upstream images_ at the time these images
 #    were built and tagged.
 # 7. If an OS is no longer supported for a given Ruby version upstream (e.g.,
-#    'jessie' for Ruby 2.5.0 and later), then any image built on that OS
+#    'jessie' in previous image builds), then any image built on that OS
 #    **must** include a Ruby version number for which that OS is supported. This
-#    **may** be a partial version number; e.g., the tag '2.4-jessie-no-qt' is a
-#    valid alias for (presently) '2.4.4-jessie-no-qt'. However, '2-jessie-no-qt'
-#    and 'jessie-no-qt' **are not** valid tags, as the current Version 2.x
-#    release (and latest overall) of Ruby is currently 2.5.1.
+#    **may** be a partial version number; e.g., the tag '2.4-jessie-no-qt' was a
+#    valid alias for '2.4.4-jessie-no-qt'. However, '2-jessie-no-qt' and
+#    'jessie-no-qt' **were not** valid tags once the current Version 2.x release
+#    became 2.5.0. (The latest overall version of Ruby is currently 2.5.1.)
 #
 
 if [[ -z "${DOCKER_RUBY_VERSION}" ]]; then
@@ -71,6 +71,23 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 docker container prune -f && docker image prune -f
 
 ###
+### 2.5.1 on Alpine 3.7
+###
+
+docker build --build-arg RUBY_VERSION=2.5.1 \
+             --build-arg RUBY_EXTRA='3.7' \
+             --build-arg VERSION=$DOCKER_RUBY_VERSION \
+             --tag 'jdickey/ruby:2.5.1-alpine3.7-no-qt' \
+             --squash --compress --file Dockerfile.no-qt.alpine .
+
+docker build --build-arg RUBY_VERSION=2.5.1 \
+             --build-arg RUBY_EXTRA='3.7' \
+             --build-arg VERSION=$DOCKER_RUBY_VERSION \
+             --tag 'jdickey/ruby:2.5.1-alpine3.7' \
+             --squash --compress --file Dockerfile.main.alpine .
+docker container prune -f && docker image prune -f
+
+###
 ### 2.5.0 on Debian Stretch
 ###
 
@@ -97,23 +114,6 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
              --tag 'jdickey/ruby:2.5.0-slim-stretch' \
              --squash --compress --file Dockerfile.main.debian .
-docker container prune -f && docker image prune -f
-
-###
-### 2.5.1 on Alpine 3.7
-###
-
-docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-alpine3.7-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-alpine3.7' \
-             --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
 
 ###
@@ -161,34 +161,6 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
              --tag 'jdickey/ruby:2.4.4-slim-stretch' \
              --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
-
-###
-### 2.4.4 on Debian Jessie
-###
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-jessie-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-jessie' \
-             --squash --compress --file Dockerfile.main.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-slim-jessie-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-slim-jessie' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-slim-jessie' \
-             --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
 
 
@@ -223,3 +195,4 @@ echo "Done!"
 
 echo 'All images created and tagged.'
 echo "Use 'docker image ls jdickey/ruby' to see a complete list."
+# docker image tag jdickey/ruby:2.5.1-stretch jdickey/ruby:latest
