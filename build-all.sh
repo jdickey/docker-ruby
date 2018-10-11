@@ -161,7 +161,6 @@ docker build --build-arg RUBY_VERSION=2.4.4 \
              --tag 'jdickey/ruby:2.4.4-slim-stretch' \
              --squash --compress --file Dockerfile.main.debian .
 docker container prune -f && docker image prune -f
-docker container prune -f && docker image prune -f
 
 
 ###
