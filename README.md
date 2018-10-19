@@ -3,7 +3,7 @@
 # Contents
 
 * [Overview](#overview)
-  * [IMPORTANT NOTES for Image Prior To Version 0\.13\.0](#important-notes-for-image-prior-to-version-0130)
+  * [IMPORTANT NOTES for Image Prior To Version 0\.14\.0](#important-notes-for-image-prior-to-version-0140)
   * [Supported Tags](#supported-tags)
     * [Logical but Nonexistent Tags](#logical-but-nonexistent-tags)
     * [What? No Dockerfiles?](#what-no-dockerfiles)
@@ -15,6 +15,9 @@
     * [Base Software](#base-software-1)
     * [Qt5 Software](#qt5-software-1)
 * [Changelog](#changelog)
+  * [0\.14\.0 (19 October 2018)](#0140-19-october-2018)
+  * [0\.13\.4 (10 October 2018)](#0134-10-october-2018)
+  * [0\.13\.3 (24 September 2018)](#0133-24-september-2018)
   * [0\.13\.2 (20 September 2018)](#0132-20-september-2018)
   * [0\.13\.1 (24 June 2018)](#0131-24-june-2018)
   * [0\.13\.0 (11 June 2018)](#0130-11-june-2018)
@@ -33,24 +36,30 @@
 
 I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/), install additional software packages, and do some basic Ruby housekeeping (installing Bundler and making sure the system Gems are up-to-date). On a reasonably modern iMac with a decent First World internet connection, this can take about *20 minutes.* Repeat this half-a-dozen times over the course of a day and you've lost two hours. As Orwell wrote, *doubleplus ungood.*
 
-## IMPORTANT NOTES for Image Prior To Version 0.13.0
+## IMPORTANT NOTES for Image Prior To Version 0.14.0
 
-Basically, *please do not use them.* Rebuild any of your images using `jdickey/ruby` as a base using the current-at-the-time-of-writing Version 0.13.0 or later. The Alpine images are believed to be OK, but the Debian images, even those claiming to support Qt5, in fact have a mixture of Qt4 and Qt5 which causes several versions of `capybara-webkit` to have Issues, and which imminent future versions of `capybara-webkit` will not support, as they've officially deprecated Qt4. To find which version of the image you're working with, run the command line `docker inspect jdickey/ruby:2.5.1 | grep '"version"'`, substituting the tag of the image you are actually using if not `2.5.1`.
+Basically, *please do not use them.* Rebuild any of your images using `jdickey/ruby` as a base using the current-at-the-time-of-writing Version 0.14.0 or later.
+
+Version 0.14.0 includes images for Ruby versions **2.5.3** and **2.4.5**, as well as a subset of previous releases in the 2.5.*x* and 2.4.*x* for completeness. **You are urged in the strongest possible terms _not_ to use any images whose tags contain `2.5.0` or `2.5.1`, or `2.4.0` through `2.4.4` inclusive, for any purpose other than testing.** (The upstream base image for `2.5.2` has been yanked.) Do **not** deploy your own images based on known-insecure Ruby versions where others can run them, particularly where assumptions are being made about the security and encryption offered by SSL. See the [release notes](https://www.ruby-lang.org/en/downloads/releases/) for specific Ruby versions to learn more.
+
+A comparable notice for the release of Version 0.13.0 read
+
+> The Alpine images are believed to be OK, but the Debian images, even those claiming to support Qt5, in fact have a mixture of Qt4 and Qt5 which causes several versions of `capybara-webkit` to have Issues, and which imminent future versions of `capybara-webkit` will not support, as they've officially deprecated Qt4. To find which version of the image you're working with, run the command line `docker inspect jdickey/ruby:2.5.1 | grep '"version"'`, substituting the tag of the image you are actually using if not `2.5.1`.
 
 ## Supported Tags
 
 Each image has one tag that follows the format `2.x.y-os_build[-no-qt]`, where
 
-1. `2.x.y` is the full version number of the Ruby version hosted by the image, which will be one of `2.5.1` (the current version), `2.5.0`, or `2.4.4`;
+1. `2.x.y` is the full version number of the Ruby version hosted by the image, which will be one of `2.5.3` (the current version), `2.5.1`, `2.5.0`, `2.4.5` (the current `2.4` release), or `2.4.4`. Again, you are **strongly urged** not to use releases prior to the latest release on a given version branch (`2.5` or `2.4`) for new images;
 2. `os_build` identifies which OS and variant the image was based on. These can be any one of
 	1. `stretch`: Debian [Stretch](https://en.wikipedia.org/wiki/Debian#Code_names) (9.0);
 	2. `stretch-slim`: A "slim" version of Stretch;
 	3. `alpine3.7` (synonyms: `alpine37` and `alpine`): Alpine Linux 3.7, a minimalist Linux distribution. (There is no 'slim' version of `alpine`; it's already the smallest of the listed images);
 3. The suffix `-no-qt` indicates that the image has been built *without* the Qt OS-level libraries and tools needed to run the [Capybara](https://teamcapybara.github.io/capybara/) test framework (and thus does not include Capybara itself or the `capybara-webkit` headless browser).
 
-The `latest` tag identifies the latest version of Ruby (as of June 2018, version 2.5.1) on the latest, non-`slim` version of Debian (currently `stretch`), built *with* the Qt and Capybara tools. It should be the default choice when you simply want the most recent supported Ruby version, but is not recommended for production use in most cases. (We recommend exploring basing your image on an `alpine` and `-no-qt` build for production.)
+The `latest` tag identifies the latest version of Ruby (as of October 2018, version 2.5.3) on the latest, non-`slim` version of Debian (currently `stretch`), built *with* the Qt and Capybara tools. It should be the default choice when you simply want the most recent supported Ruby version, but is not recommended for production use in most cases. (We recommend exploring basing your image on an `alpine` and `-no-qt` build for production.)
 
-Minor-version tags such as `2.4-stretch` or `2.5-alpine-no-qt` identify the latest supported release of that minor version of Ruby on the specified OS build. As later versions of Ruby are released and supported (e.g., a hypothetical 2.4.5 or 2.5.2), the corresponding minor-version tag will be redefined to match the new full-version-number tag.
+Minor-version tags such as `2.4-stretch` or `2.5-alpine-no-qt` identify the latest supported release of that minor version of Ruby on the specified OS build. As later versions of Ruby are released and supported (e.g., a hypothetical 2.4.6 or 2.5.4), the corresponding minor-version tag will be redefined to match the new full-version-number tag.
 
 Major-version tags (e.g., `2-stretch` or `2-alpine3.7`) identify the latest supported minor release of the latest supported major release of Ruby (currently `2.5.1`), and are updated in a manner analogous to minor-version tags; i.e., when Ruby 2.6 is released (expected to be in December, 2018), each major-version tag will be updated to match `2.6.0` on each respective operating system (e.g., `2.6.0-stretch`).
 
@@ -122,6 +131,22 @@ The following Alpine packages are installed in Alpine images not tagged `no-qt` 
 * `xvfb`
 
 # Changelog
+
+## 0.14.0 (19 October 2018)
+
+* Introduced images built on Ruby versions 2.5.3 and 2.4.5.
+* Reworded the README to emphasise the urgency of using outdated Ruby versions only for testing.
+
+## 0.13.4 (10 October 2018)
+
+* No images based on Debian Jessie are supported as of this release;
+* Installed (then-)current version of Bundler into default Gem set;
+* Updated now-outdated `capybara`, `capybara-webkit`, and `nokogiri` Gems.
+
+## 0.13.3 (24 September 2018)
+
+* Added new `jdickey_ruby_image_version` label with same content as `version`. The latter may (should?) be overwritten by subsequent images using this as a base; the former ought not to be;
+* Updated now-outdated Gem versions.
 
 ## 0.13.2 (20 September 2018)
 

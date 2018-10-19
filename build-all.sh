@@ -41,33 +41,62 @@ if [[ -z "${DOCKER_RUBY_VERSION}" ]]; then
   return 1
 fi
 
+function docker_build() {
+  local TAG_EXTRA=''
+  local FILE_VARIANT='main'
+
+  if [[ ${4:-oops} == 'no-qt' ]]; then
+    TAG_EXTRA='-no-qt'
+    FILE_VARIANT='no-qt'
+  fi
+
+  docker build --build-arg RUBY_VERSION=$1 \
+               --build-arg RUBY_EXTRA="-$2" \
+               --build-arg VERSION=$DOCKER_RUBY_VERSION \
+               --tag "jdickey/ruby:$1-$2$TAG_EXTRA" \
+               --squash --compress --file Dockerfile.$FILE_VARIANT.$3 .
+}
+
+# ############################################################################ #
+
 ###
-### 2.5.1 on Debian Stretch
+### Debian Stretch
 ###
 
-docker build --build-arg RUBY_VERSION=2.5.1 \
-            --build-arg RUBY_EXTRA='-stretch' \
-            --build-arg VERSION=$DOCKER_RUBY_VERSION \
-            --tag 'jdickey/ruby:2.5.1-stretch-no-qt' \
-            --squash --compress --file Dockerfile.no-qt.debian .
+for RUBY_VERSION in 2.5.3 2.5.1 2.5.0 2.4.5 2.4.4; do
+  for STRETCH in stretch slim-stretch; do
+    docker_build $RUBY_VERSION $STRETCH debian no-qt
+    docker_build $RUBY_VERSION $STRETCH debian
+  done
+done
 
-docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-stretch' \
-             --squash --compress --file Dockerfile.main.debian .
+# ############################################################################ #
 
-docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-slim-stretch-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.debian .
+# When building 0.14.0, putting a `docker_build` function together that worked
+# for Stretch wasn't too tough; I kept tripping over one thing or another trying
+# to replicate it for Alpine and gave up after a dozen tries. I'll get it right
+# another time.
+#
+# Why bother, you ask? Look at what it takes to build Stretch images compared to
+# how Alpine images are built, and consider adding a new Ruby version to each.
+# There's a typo that you've managed to introduce into each. Which do you think
+# is going to be the *easier* of the two tpyos to find and repair?
 
-docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='-slim-stretch' \
+###
+### 2.5.3 on Alpine 3.7
+###
+
+docker build --build-arg RUBY_VERSION=2.5.3 \
+             --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-slim-stretch' \
-             --squash --compress --file Dockerfile.main.debian .
+             --tag 'jdickey/ruby:2.5.3-alpine3.7-no-qt' \
+             --squash --compress --file Dockerfile.no-qt.alpine .
+
+docker build --build-arg RUBY_VERSION=2.5.3 \
+             --build-arg RUBY_EXTRA='3.7' \
+             --build-arg VERSION=$DOCKER_RUBY_VERSION \
+             --tag 'jdickey/ruby:2.5.3-alpine3.7' \
+             --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
 
 ###
@@ -88,35 +117,6 @@ docker build --build-arg RUBY_VERSION=2.5.1 \
 docker container prune -f && docker image prune -f
 
 ###
-### 2.5.0 on Debian Stretch
-###
-
-docker build --build-arg RUBY_VERSION=2.5.0 \
-            --build-arg RUBY_EXTRA='-stretch' \
-            --build-arg VERSION=$DOCKER_RUBY_VERSION \
-            --tag 'jdickey/ruby:2.5.0-stretch-no-qt' \
-            --squash --compress --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.5.0 \
-             --build-arg RUBY_EXTRA='-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.0-stretch' \
-             --squash --compress --file Dockerfile.main.debian .
-
-docker build --build-arg RUBY_VERSION=2.5.0 \
-             --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.0-slim-stretch-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.5.0 \
-             --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.0-slim-stretch' \
-             --squash --compress --file Dockerfile.main.debian .
-docker container prune -f && docker image prune -f
-
-###
 ### 2.5.0 on Alpine 3.7
 ###
 
@@ -134,34 +134,21 @@ docker build --build-arg RUBY_VERSION=2.5.0 \
 docker container prune -f && docker image prune -f
 
 ###
-### 2.4.4 on Debian Stretch
+### 2.4.5 on Alpine 3.7
 ###
 
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-stretch' \
+docker build --build-arg RUBY_VERSION=2.4.5 \
+             --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-stretch-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.debian .
+             --tag 'jdickey/ruby:2.4.5-alpine3.7-no-qt' \
+             --squash --compress --file Dockerfile.no-qt.alpine .
 
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-stretch' \
+docker build --build-arg RUBY_VERSION=2.4.5 \
+             --build-arg RUBY_EXTRA='3.7' \
              --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-stretch' \
-             --squash --compress --file Dockerfile.main.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-slim-stretch-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.debian .
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='-slim-stretch' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-slim-stretch' \
-             --squash --compress --file Dockerfile.main.debian .
+             --tag 'jdickey/ruby:2.4.5-alpine3.7' \
+             --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
-
 
 ###
 ### 2.4.4 on Alpine 3.7
@@ -194,4 +181,4 @@ echo "Done!"
 
 echo 'All images created and tagged.'
 echo "Use 'docker image ls jdickey/ruby' to see a complete list."
-# docker image tag jdickey/ruby:2.5.1-stretch jdickey/ruby:latest
+docker image tag jdickey/ruby:2.5.3-stretch jdickey/ruby:latest
