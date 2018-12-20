@@ -19,7 +19,7 @@ set -euo pipefail
 # 5. An image tag containing a _partial_ version number, such as '2-alpine'
 #    or '2.4-stretch-no-qt', **must** be synonymous with the _latest_ matching
 #    version at the time the image was built. As of April 2018, for the examples
-#    given, those would be '2.5.1-alpine-qt' and '2.4.4-stretch-no-qt',
+#    given, those would be '2.5.3-alpine-qt' and '2.4.4-stretch-no-qt',
 #    respectively.
 # 6. An image tag containing *no* Ruby version number *must* match the _latest
 #    version of Ruby packaged in the upstream images_ at the time these images

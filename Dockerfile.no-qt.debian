@@ -31,4 +31,5 @@ RUN gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 minitest && \
     gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 power_assert && \
     gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 rake && \
     gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 test-unit && \
+    gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 rubygems-update && \
     gem cleanup

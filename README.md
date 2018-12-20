@@ -2,41 +2,22 @@
 
 # Contents
 
-* [Overview](#overview)
-  * [IMPORTANT NOTES for Image Prior To Version 0\.14\.0](#important-notes-for-image-prior-to-version-0140)
-  * [Supported Tags](#supported-tags)
-    * [Logical but Nonexistent Tags](#logical-but-nonexistent-tags)
-    * [What? No Dockerfiles?](#what-no-dockerfiles)
-* [Software](#software)
-  * [Debian Stretch](#debian-stretch)
-    * [Base Software](#base-software)
-    * [Qt5 Software](#qt5-software)
-  * [Alpine Linux](#alpine-linux)
-    * [Base Software](#base-software-1)
-    * [Qt5 Software](#qt5-software-1)
-* [Changelog](#changelog)
-  * [0\.14\.0 (19 October 2018)](#0140-19-october-2018)
-  * [0\.13\.4 (10 October 2018)](#0134-10-october-2018)
-  * [0\.13\.3 (24 September 2018)](#0133-24-september-2018)
-  * [0\.13\.2 (20 September 2018)](#0132-20-september-2018)
-  * [0\.13\.1 (24 June 2018)](#0131-24-june-2018)
-  * [0\.13\.0 (11 June 2018)](#0130-11-june-2018)
-  * [0\.12\.0 (11 April 2018) WITHDRAWN — DO NOT USE](#0120-11-april-2018-withdrawn--do-not-use)
-  * [0\.11\.2 (15 March 2018)](#0112-15-march-2018)
-  * [0\.11\.1 (7 March 2018)](#0111-7-march-2018)
-  * [0\.11\.0 (4 March 2018)](#0110-4-march-2018)
-  * [0\.10\.0 (1 March 2018)](#0100-1-march-2018)
-  * [0\.9\.0 (11 January 2018)](#090-11-january-2018)
-  * [0\.8\.0 (8 January 2018)](#080-8-january-2018)
-  * [0\.7\.0 (17 November 2017)](#070-17-november-2017)
-* [Additional Documentation](#additional-documentation)
-* [Legal](#legal)
 
 # Overview
 
 I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/), install additional software packages, and do some basic Ruby housekeeping (installing Bundler and making sure the system Gems are up-to-date). On a reasonably modern iMac with a decent First World internet connection, this can take about *20 minutes.* Repeat this half-a-dozen times over the course of a day and you've lost two hours. As Orwell wrote, *doubleplus ungood.*
 
-## IMPORTANT NOTES for Image Prior To Version 0.14.0
+## IMPORTANT NOTES
+
+### For Versions 0.15.0 and Later
+
+Starting from Version 0.15.0, the `capybara-webkit` Gem (and its supporting `json` Gem) **will no longer be part of this image**. It's given us and countless other teams ulcers for quite some time, and our upstream projects no longer use it (in favour of Capybara+Selenium presently, but [Rubium](https://github.com/vifreefly/rubium)) is firmly in the "assess" ring of our technology radar.)
+
+Does this mean that we'll stop building Qt-including images entirely? Very possibly at some point after 0.15.0, as the only major remaining Gem installed is `capybara`, which doesn't itself even _require_ Qt. Our feeling is that simplifying this image's build management by pushing installation of `capybara` and Qt to higher-level images that actually _use_ them would be a net positive for us.
+
+If there are any other users of these images with strong opposing opinions, now is the time to get that discussion started.
+
+### For Images Prior To Version 0.14.0
 
 Basically, *please do not use them.* Rebuild any of your images using `jdickey/ruby` as a base using the current-at-the-time-of-writing Version 0.14.0 or later.
 
@@ -131,6 +112,11 @@ The following Alpine packages are installed in Alpine images not tagged `no-qt` 
 * `xvfb`
 
 # Changelog
+
+## 0.14.1 (20 December 2018)
+
+* Added "Important Notes" subsection _For Versions 0.15.0 and Later_; **please read**;
+* Updated Gem versions.
 
 ## 0.14.0 (19 October 2018)
 
