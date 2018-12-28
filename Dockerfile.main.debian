@@ -27,15 +27,5 @@ LABEL jdickey_ruby_image_version="${VERSION}"
 RUN apt-get update -qq && apt-get dist-upgrade -qq -y && \
     apt-get install -qq -y libqt5webkit5-dev qt5-qmake libxml2-dev libxslt1-dev xvfb && \
     apt-get clean && find /var/lib/apt/lists/* -delete
-RUN gem install public_suffix:3.0.3 \
-                addressable:2.5.2 \
-                mini_mime:1.0.1 \
-                mini_portile2:2.4.0 \
-                nokogiri:1.9.1 \
-                rack:2.0.6 \
-                rack-test:1.1.0 \
-                xpath:3.2.0 \
-                capybara:3.9.0 \
-                json:2.1.0 \
-                capybara-webkit:1.15.1 && \
+RUN gem install capybara capybara-webkit && \
     gem update && gem update --system && gem cleanup

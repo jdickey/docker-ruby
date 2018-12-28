@@ -11,7 +11,7 @@ I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/)
 
 ### For Versions 0.15.0 and Later
 
-Starting from Version 0.15.0, the `capybara-webkit` Gem (and its supporting `json` Gem) **will no longer be part of this image**. It's given us and countless other teams ulcers for quite some time, and our upstream projects no longer use it (in favour of Capybara+Selenium presently, but [Rubium](https://github.com/vifreefly/rubium)) is firmly in the "assess" ring of our technology radar.)
+Starting from Version 0.15.0, the `capybara-webkit` Gem (and its supporting `json` Gem) **will no longer be part of this image**. It's given us and countless other teams ulcers for quite some time, and our own downstream projects no longer use it (in favour of Capybara+Selenium presently, but [Rubium](https://github.com/vifreefly/rubium)) is firmly in the "assess" ring of our technology radar.)
 
 Does this mean that we'll stop building Qt-including images entirely? Very possibly at some point after 0.15.0, as the only major remaining Gem installed is `capybara`, which doesn't itself even _require_ Qt. Our feeling is that simplifying this image's build management by pushing installation of `capybara` and Qt to higher-level images that actually _use_ them would be a net positive for us.
 
@@ -112,6 +112,10 @@ The following Alpine packages are installed in Alpine images not tagged `no-qt` 
 * `xvfb`
 
 # Changelog
+
+## 0.14.2 (28 December 2018)
+
+To (probably) close out the old year, we've updated Gems again (including `bundler` and RubyGems itself). There isn't yet an official Ruby 2.6.0 upstream image yet; that will be the base for 0.15.0 as soon as it's available.
 
 ## 0.14.1 (20 December 2018)
 

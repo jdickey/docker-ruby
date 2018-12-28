@@ -1,6 +1,6 @@
 data:
   metadata:
-    image_version: 0.13.2
+    image_version: 0.14.2
   builds:
     2.5.3:
       stretch:
