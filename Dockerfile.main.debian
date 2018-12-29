@@ -27,5 +27,4 @@ LABEL jdickey_ruby_image_version="${VERSION}"
 RUN apt-get update -qq && apt-get dist-upgrade -qq -y && \
     apt-get install -qq -y libqt5webkit5-dev qt5-qmake libxml2-dev libxslt1-dev xvfb && \
     apt-get clean && find /var/lib/apt/lists/* -delete
-RUN gem install capybara capybara-webkit && \
-    gem update && gem update --system && gem cleanup
+RUN gem install capybara && gem update && gem update --system && gem cleanup

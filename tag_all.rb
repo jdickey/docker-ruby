@@ -15,6 +15,7 @@ builds.map do |version_id, version_data|
       image_name += '-no-qt' if build_id == 'no-qt'
       image = Docker::Image.get(image_name)
       build_data['tags'].map { |tag| image.tag(repo: repo_name, tag: tag) }
+      image.tag(repo: repo_name, tag: 'latest') if build_data['actual_latest']
     end
   end
 end

@@ -19,14 +19,6 @@ LABEL version="${VERSION}"
 
 RUN apk add --no-cache alpine-sdk bash build-base libressl-dev nodejs tzdata zsh
 RUN gem install yard && yard config --gem-install-yri \
-    && gem install bundler && gem update --system && gem update && gem cleanup
-# This will fail to uninstall `did_you_mean` on 2.4.x Rubies, which is what we
-# want since it was never *installed* on 2.4.x Rubies. ;-)
-RUN gem uninstall -i /usr/local/lib/ruby/gems/2.5.0 did_you_mean || true
-RUN gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 minitest && \
-    gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 net-telnet && \
-    gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 power_assert && \
-    gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 rake && \
-    gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 test-unit && \
-    gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 rubygems-update && \
+    && gem install bundler && gem update --system && gem update && gem cleanup && \
+    for i in `gem list | grep ', ' | grep -v default | cut -d ' ' -f 1`; do gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 $i; done && \
     gem cleanup

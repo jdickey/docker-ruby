@@ -17,10 +17,8 @@ set -euo pipefail
 #    Debian OS used for the upstream image (currently 'stretch'; 'jessie' is no
 #    longer supported by these images).
 # 5. An image tag containing a _partial_ version number, such as '2-alpine'
-#    or '2.4-stretch-no-qt', **must** be synonymous with the _latest_ matching
-#    version at the time the image was built. As of April 2018, for the examples
-#    given, those would be '2.5.3-alpine-qt' and '2.4.4-stretch-no-qt',
-#    respectively.
+#    or '2.5-stretch-no-qt', **must** be synonymous with the _latest_ matching
+#    version at the time the image was built.
 # 6. An image tag containing *no* Ruby version number *must* match the _latest
 #    version of Ruby packaged in the upstream images_ at the time these images
 #    were built and tagged.
@@ -30,7 +28,7 @@ set -euo pipefail
 #    **may** be a partial version number; e.g., the tag '2.4-jessie-no-qt' was a
 #    valid alias for '2.4.4-jessie-no-qt'. However, '2-jessie-no-qt' and
 #    'jessie-no-qt' **were not** valid tags once the current Version 2.x release
-#    became 2.5.0. (The latest overall version of Ruby is currently 2.5.1.)
+#    became 2.5.0.
 #
 
 if [[ -z "${DOCKER_RUBY_VERSION}" ]]; then
@@ -63,7 +61,7 @@ function docker_build() {
 ### Debian Stretch
 ###
 
-for RUBY_VERSION in 2.5.3 2.5.1 2.5.0 2.4.5 2.4.4; do
+for RUBY_VERSION in 2.6.0 2.5.3 2.5.1; do
   for STRETCH in stretch slim-stretch; do
     docker_build $RUBY_VERSION $STRETCH debian no-qt
     docker_build $RUBY_VERSION $STRETCH debian
@@ -72,99 +70,37 @@ done
 
 # ############################################################################ #
 
-# When building 0.14.0, putting a `docker_build` function together that worked
-# for Stretch wasn't too tough; I kept tripping over one thing or another trying
-# to replicate it for Alpine and gave up after a dozen tries. I'll get it right
-# another time.
-#
-# Why bother, you ask? Look at what it takes to build Stretch images compared to
-# how Alpine images are built, and consider adding a new Ruby version to each.
-# There's a typo that you've managed to introduce into each. Which do you think
-# is going to be the *easier* of the two tpyos to find and repair?
+# Note that, since there is no Alpine 3.8-based image for Ruby 2.5.1, we have to
+# adjust our build process here a bit.
 
-###
-### 2.5.3 on Alpine 3.7
-###
+for RUBY_VERSION in 2.6.0 2.5.3; do
+  for ALPINE_VERSION in 3.7 3.8; do
+    docker build --build-arg RUBY_VERSION=$RUBY_VERSION \
+                 --build-arg RUBY_EXTRA=$ALPINE_VERSION \
+                 --build-arg VERSION=$DOCKER_RUBY_VERSION \
+                 --tag "jdickey/ruby:$RUBY_VERSION-alpine$ALPINE_VERSION-no-qt" \
+                 --squash --compress --file Dockerfile.no-qt.alpine .
+    docker build --build-arg RUBY_VERSION=$RUBY_VERSION \
+                 --build-arg RUBY_EXTRA=$ALPINE_VERSION \
+                 --build-arg VERSION=$DOCKER_RUBY_VERSION \
+                 --tag "jdickey/ruby:$RUBY_VERSION-alpine$ALPINE_VERSION" \
+                 --squash --compress --file Dockerfile.main.alpine .
+    docker container prune -f && docker image prune -f
+  done
+done
 
-docker build --build-arg RUBY_VERSION=2.5.3 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.3-alpine3.7-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.5.3 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.3-alpine3.7' \
-             --squash --compress --file Dockerfile.main.alpine .
-docker container prune -f && docker image prune -f
-
-###
-### 2.5.1 on Alpine 3.7
-###
+# Build 2.5.1 for Alpine 3.7 onlyy
 
 docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-alpine3.7-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.alpine .
-
+              --build-arg RUBY_EXTRA=3.7 \
+              --build-arg VERSION=$DOCKER_RUBY_VERSION \
+              --tag "jdickey/ruby:2.5.1-alpine3.7-no-qt" \
+              --squash --compress --file Dockerfile.no-qt.alpine .
 docker build --build-arg RUBY_VERSION=2.5.1 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.1-alpine3.7' \
-             --squash --compress --file Dockerfile.main.alpine .
-docker container prune -f && docker image prune -f
-
-###
-### 2.5.0 on Alpine 3.7
-###
-
-docker build --build-arg RUBY_VERSION=2.5.0 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.0-alpine3.7-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.5.0 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.5.0-alpine3.7' \
-             --squash --compress --file Dockerfile.main.alpine .
-docker container prune -f && docker image prune -f
-
-###
-### 2.4.5 on Alpine 3.7
-###
-
-docker build --build-arg RUBY_VERSION=2.4.5 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.5-alpine3.7-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.4.5 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.5-alpine3.7' \
-             --squash --compress --file Dockerfile.main.alpine .
-docker container prune -f && docker image prune -f
-
-###
-### 2.4.4 on Alpine 3.7
-###
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-alpine3.7-no-qt' \
-             --squash --compress --file Dockerfile.no-qt.alpine .
-
-docker build --build-arg RUBY_VERSION=2.4.4 \
-             --build-arg RUBY_EXTRA='3.7' \
-             --build-arg VERSION=$DOCKER_RUBY_VERSION \
-             --tag 'jdickey/ruby:2.4.4-alpine3.7' \
-             --squash --compress --file Dockerfile.main.alpine .
+              --build-arg RUBY_EXTRA=3.7 \
+              --build-arg VERSION=$DOCKER_RUBY_VERSION \
+              --tag "jdickey/ruby:2.5.1-alpine3.7" \
+              --squash --compress --file Dockerfile.main.alpine .
 docker container prune -f && docker image prune -f
 
 ###

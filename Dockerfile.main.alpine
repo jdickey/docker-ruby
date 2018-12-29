@@ -24,6 +24,5 @@ LABEL includesQt=true
 LABEL version="${VERSION}"
 LABEL jdickey_ruby_image_version="${VERSION}"
 
-RUN apk add --no-cache libxml2-dev libxslt-dev qt5-qtwebkit-dev xvfb
-RUN gem install capybara capybara-webkit && \
-    gem update && gem update --system && gem cleanup
+RUN apk add --no-cache libxml2-dev libxslt-dev qt5-qtwebkit-dev xvfb && \
+    gem install capybara && gem update && gem update --system && gem cleanup
