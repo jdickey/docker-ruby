@@ -21,6 +21,7 @@
     * [Base Software](#base-software-1)
     * [Qt5 Software](#qt5-software-1)
 * [Changelog](#changelog)
+  * [0.15.1 (9 January 2019)](#0151-9-january-2019)
   * [0.15.0 (29 December 2018)](#0150-29-december-2018)
   * [0.14.2 (28 December 2018)](#0142-28-december-2018)
   * [0.14.1 (20 December 2018)](#0141-20-december-2018)
@@ -157,6 +158,10 @@ The following Alpine packages are installed in Alpine images not tagged `no-qt` 
 * `xvfb`
 
 # Changelog
+
+## 0.15.1 (9 January 2019)
+
+Our first release of the New Year is a Gem-version bump, bringing Bundler to Version 2.0.1 and Nokogiri to Version 1.10.0. No other changes have been made; importantly, Ruby 2.5.1 is still supported for you laggards.
 
 ## 0.15.0 (29 December 2018)
 

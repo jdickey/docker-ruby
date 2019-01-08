@@ -31,14 +31,6 @@ set -euo pipefail
 #    became 2.5.0.
 #
 
-if [[ -z "${DOCKER_RUBY_VERSION}" ]]; then
-  echo You MUST define the DOCKER_RUBY_VERSION environment variable when using this script.
-  echo It will be encoded into the built images as a version ID.
-  echo Example usage: DOCKER_RUBY_VERSION=0.27.0 bash ./build_all.sh
-  sleep 3
-  return 1
-fi
-
 function docker_build() {
   local TAG_EXTRA=''
   local FILE_VARIANT='main'
@@ -54,6 +46,14 @@ function docker_build() {
                --tag "jdickey/ruby:$1-$2$TAG_EXTRA" \
                --squash --compress --file Dockerfile.$FILE_VARIANT.$3 .
 }
+
+if [[ -z $DOCKER_RUBY_VERSION ]]; then
+  echo You MUST define the DOCKER_RUBY_VERSION environment variable when using this script.
+  echo It will be encoded into the built images as a version ID.
+  echo Example usage: DOCKER_RUBY_VERSION=0.27.0 bash ./build_all.sh
+  sleep 3
+  exit 1
+fi
 
 # ############################################################################ #
 
