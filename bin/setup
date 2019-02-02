@@ -1,10 +1,12 @@
 #!/bin/bash
-rbenv gemset delete 2.5 ./tmp/gemset
-rm -rf tmp .rbenv-gemsets
+
+# This works for MRI; it may or may not work for other Rubies.
+RUBY_VERSION=`ruby --version | cut -d ' ' -f 2 | sed 's/p.*//'`
+
+rbenv gemset delete $RUBY_VERSION ./tmp/gemset
+rm -rf tmp/gemset .rbenv-gemsets
 mkdir -p tmp/gemset
-# touch tmp/.gitkeep
-# git add -f ./tmp/.gitkeep
-rbenv gemset create 2.5 ./tmp/gemset
+rbenv gemset create $RUBY_VERSION ./tmp/gemset
 echo ./tmp/gemset > .rbenv-gemsets
 rbenv rehash
 gem install yard

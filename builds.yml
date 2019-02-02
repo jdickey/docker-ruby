@@ -2,161 +2,64 @@ data:
   metadata:
     image_version: 0.15.0
   builds:
+    2.6.1:
+      stretch:
+        actual_latest: true
+        tags:
+          - 2.6-stretch
+          - 2-stretch
+          - stretch
+          - '2.6.1'
+          - '2.6'
+          - '2'
+      slim-stretch:
+        tags:
+          - 2.6-slim-stretch
+          - 2-slim-stretch
+          - slim-stretch
+          - 2.6.1-slim
+          - 2.6-slim
+          - 2-slim
+          - slim
+      alpine3.8:
+        tags:
+          - 2.6.1-alpine38
+          - 2.6.1-alpine
+          - 2.6-alpine3.8
+          - 2.6-alpine38
+          - 2.6-alpine
+          - 2-alpine3.8
+          - 2-alpine38
+          - 2-alpine
+          - alpine3.8
+          - alpine38
+          - alpine
     2.6.0:
       stretch:
-        no-qt:
-          tags:
-            - 2.6-stretch-no-qt
-            - 2-stretch-no-qt
-            - stretch-no-qt
-            - 2.6.0-no-qt
-            - 2.6-no-qt
-            - 2-no-qt
-            - no-qt
-        qt:
-          actual_latest: true
-          tags:
-            - 2.6-stretch
-            - 2-stretch
-            - stretch
-            - '2.6.0'
-            - '2.6'
-            - '2'
+        tags:
+          - '2.6.0'
       slim-stretch:
-        no-qt:
-          tags:
-            - 2.6-slim-stretch-no-qt
-            - 2-slim-stretch-no-qt
-            - slim-stretch-no-qt
-            - 2.6.0-slim-no-qt
-            - 2.6-slim-no-qt
-            - 2-slim-no-qt
-            - slim-no-qt
-        qt:
-          tags:
-            - 2.6-slim-stretch
-            - 2-slim-stretch
-            - slim-stretch
-            - 2.6.0-slim
-            - 2.6-slim
-            - 2-slim
-            - slim
+        tags:
+          - 2.6.0-slim
       alpine3.8:
-        no-qt:
-          tags:
-            - 2.6.0-alpine38-no-qt
-            - 2.6.0-alpine-no-qt
-            - 2.6-alpine3.8-no-qt
-            - 2.6-alpine38-no-qt
-            - 2.6-alpine-no-qt
-            - 2-alpine3.8-no-qt
-            - 2-alpine38-no-qt
-            - 2-alpine-no-qt
-            - alpine3.8-no-qt
-            - alpine38-no-qt
-            - alpine-no-qt
-        qt:
-          tags:
-            - 2.6.0-alpine38
-            - 2.6.0-alpine
-            - 2.6-alpine3.8
-            - 2.6-alpine38
-            - 2.6-alpine
-            - 2-alpine3.8
-            - 2-alpine38
-            - 2-alpine
-            - alpine3.8
-            - alpine38
-            - alpine
-      alpine3.7:
-        no-qt:
-          tags:
-            - 2.6.0-alpine37-no-qt
-            - 2.6-alpine3.7-no-qt
-            - 2.6-alpine37-no-qt
-            - 2-alpine3.7-no-qt
-            - 2-alpine37-no-qt
-            - alpine3.7-no-qt
-            - alpine37-no-qt
-        qt:
-          tags:
-            - 2.6.0-alpine37
-            - 2.6-alpine3.7
-            - 2.6-alpine37
-            - 2-alpine3.7
-            - 2-alpine37
-            - alpine3.7
-            - alpine37
+        tags:
+          - 2.6.0-alpine38
+          - 2.6.0-alpine
     2.5.3:
       stretch:
-        no-qt:
-          tags:
-            - 2.5-stretch-no-qt
-            - 2.5.3-no-qt
-            - 2.5-no-qt
-        qt:
-          tags:
-            - 2.5-stretch
-            - '2.5.3'
-            - '2.5'
+        tags:
+          - 2.5-stretch
+          - '2.5.3'
+          - '2.5'
       slim-stretch:
-        no-qt:
-          tags:
-            - 2.5-slim-stretch-no-qt
-            - 2.5.3-slim-no-qt
-            - 2.5-slim-no-qt
-        qt:
-          tags:
-            - 2.5-slim-stretch
-            - 2.5.3-slim
-            - 2.5-slim
+        tags:
+          - 2.5-slim-stretch
+          - 2.5.3-slim
+          - 2.5-slim
       alpine3.8:
-        no-qt:
-          tags:
-            - 2.5.3-alpine38-no-qt
-            - 2.5.3-alpine-no-qt
-            - 2.5-alpine3.8-no-qt
-            - 2.5-alpine38-no-qt
-            - 2.5-alpine-no-qt
-        qt:
-          tags:
-            - 2.5.3-alpine38
-            - 2.5.3-alpine
-            - 2.5-alpine3.8
-            - 2.5-alpine38
-            - 2.5-alpine
-      alpine3.7:
-        no-qt:
-          tags:
-            - 2.5.3-alpine37-no-qt
-            - 2.5-alpine3.7-no-qt
-            - 2.5-alpine37-no-qt
-        qt:
-          tags:
-            - 2.5.3-alpine37
-            - 2.5-alpine3.7
-            - 2.5-alpine37
-    2.5.1:
-      stretch:
-        no-qt:
-          tags:
-            - 2.5.1-no-qt
-        qt:
-          tags:
-            - '2.5.1'
-      slim-stretch:
-        no-qt:
-          tags:
-            - 2.5.1-slim-no-qt
-        qt:
-          tags:
-            - 2.5.1-slim
-      alpine3.7:
-        no-qt:
-          tags:
-            - 2.5.1-alpine37-no-qt
-            - 2.5.1-alpine-no-qt
-        qt:
-          tags:
-            - 2.5.1-alpine
-            - 2.5.1-alpine37
+        tags:
+          - 2.5.3-alpine38
+          - 2.5.3-alpine
+          - 2.5-alpine3.8
+          - 2.5-alpine38
+          - 2.5-alpine
