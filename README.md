@@ -1,5 +1,7 @@
 # [jdickey's Customised Ruby Builds](https://github.com/jdickey/docker-ruby)
 
+[![Join the chat at https://gitter.im/docker-ruby/community](https://badges.gitter.im/docker-ruby/community.svg)](https://gitter.im/docker-ruby/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # Contents
 
 
