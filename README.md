@@ -1,39 +1,9 @@
 # [jdickey's Customised Ruby Builds](https://github.com/jdickey/docker-ruby)
 
+[![Join the chat at https://gitter.im/docker-ruby/community](https://badges.gitter.im/docker-ruby/community.svg)](https://gitter.im/docker-ruby/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # Contents
 
-* [Overview](#overview)
-  * [IMPORTANT NOTES](#important-notes)
-    * [Removal of capybara\-webkit and supporting json](#removal-of-capybara-webkit-and-supporting-json)
-    * [Removed Images](#removed-images)
-  * [Supported Tags](#supported-tags)
-    * [Logical but Nonexistent Tags](#logical-but-nonexistent-tags)
-    * [What? Where Are the Dockerfiles?](#what-where-are-the-dockerfiles)
-* [Software](#software)
-  * [Debian Stretch](#debian-stretch)
-  * [Alpine Linux](#alpine-linux)
-* [Changelog](#changelog)
-  * [0\.16\.0 (3 February 2019)](#0160-2-february-2019)
-  * [0\.15\.1 (9 January 2019)](#0151-9-january-2019)
-  * [0\.15\.0 (29 December 2018)](#0150-29-december-2018)
-  * [0\.14\.2 (28 December 2018)](#0142-28-december-2018)
-  * [0\.14\.1 (20 December 2018)](#0141-20-december-2018)
-  * [0\.14\.0 (19 October 2018)](#0140-19-october-2018)
-  * [0\.13\.4 (10 October 2018)](#0134-10-october-2018)
-  * [0\.13\.3 (24 September 2018)](#0133-24-september-2018)
-  * [0\.13\.2 (20 September 2018)](#0132-20-september-2018)
-  * [0\.13\.1 (24 June 2018)](#0131-24-june-2018)
-  * [0\.13\.0 (11 June 2018)](#0130-11-june-2018)
-  * [0\.12\.0 (11 April 2018) WITHDRAWN — DO NOT USE](#0120-11-april-2018-withdrawn--do-not-use)
-  * [0\.11\.2 (15 March 2018)](#0112-15-march-2018)
-  * [0\.11\.1 (7 March 2018)](#0111-7-march-2018)
-  * [0\.11\.0 (4 March 2018)](#0110-4-march-2018)
-  * [0\.10\.0 (1 March 2018)](#0100-1-march-2018)
-  * [0\.9\.0 (11 January 2018)](#090-11-january-2018)
-  * [0\.8\.0 (8 January 2018)](#080-8-january-2018)
-  * [0\.7\.0 (17 November 2017)](#070-17-november-2017)
-* [Additional Documentation](#additional-documentation)
-* [Legal](#legal)
 
 # Overview
 
@@ -41,19 +11,19 @@ I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/)
 
 ## IMPORTANT NOTES
 
+### Alpine Linux Versions
+
+Version 0.17.0 of these images includes support for Alpine Linux 3.9, the current release as of 29 January 2019. Version 0.16.0 had supported Alpine 3.8, and versions prior to that had supported Alpine 3.7. We will continue to support *only* the most recent stable release of Alpine Linux in our images; if that causes difficulties, please feel free to [open an issue](https://github.com/jdickey/docker-ruby/issues/new).
+
 ### Removal of `capybara-webkit` and supporting `json`
 
 With effect from Version 0.16.0, there are no longer any `-qt` images built (that installed the Qt window manager and the `capybara` and (historically) `capybara-webkit` Gems). Only the images previously labelled `-no-qt` are supported. Since there is no longer a difference between `-no-qt` and anything else, that segment is dropped from the image name.
 
 This has been done because `capybara-webkit` has given us and countless other teams ulcers for quite some time, and our own downstream projects no longer use it (in favour of Capybara+Selenium presently, but [Rubium](https://github.com/vifreefly/rubium)) is firmly in the "assess" ring of our technology radar.) This also simplifies our build matrix and reduces the number of tags listed on Docker Hub.
 
-### Removed Images
+### Ruby 2.5.0 to 2.5.2 No Longer Supported
 
 Version 0.16.0 removes support for Ruby Version 2.5.1. The only supported 2.5.*x* Ruby version supported is Version 2.5.3. It also removes images based on Alpine Linux 3.7 in favour of Alpine 3.8.
-
-### Possible Future Changes
-
-Future versions of these images **may** be built in variants including documentation for the Ruby Gems installed, as now, along with `-no-doc` variants which, when a full application image is built based on those images, could well reduce the base image size by a gigabyte or more. This would entail two separate, parallel builds for each OS and Ruby version, unlike the pre-0.16.0 images where the "full" image (e.g., `2.6.0-stretch`) was built *based upon* the corresponding `-no-qt` image (e.g., `2.6.0-stretch-no-qt`). Discussions welcome, either in the `docker-ruby` [Gitter community](https://gitter.im/docker-ruby/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link) or by [opening an issue](https://github.com/jdickey/docker-ruby/issues/new).
 
 ## Supported Tags
 
@@ -115,6 +85,10 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 * `zsh`
 
 # Changelog
+
+## 0.17.0 (24 February 2019)
+
+Version 0.17.0 migrates Alpine images from Alpine 3.8 to 3.9. This *should* have no real effect on most use cases for these images.
 
 ## 0.16.0 (3 February 2019)
 
