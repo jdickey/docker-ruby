@@ -16,7 +16,7 @@ LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
 LABEL description="Base image for ${RUBY_VERSION}${RUBY_EXTRA}, with NodeJS, but without Qt"
 LABEL includesQt=false
 LABEL version="${VERSION}"
-LABEL jdickey_ruby_no-qt_image_version="${VERSION}"
+LABEL jdickey_ruby_image_version="${VERSION}"
 
 RUN apt-get update -qq && apt-get dist-upgrade -y && \
     apt-get install -y build-essential curl less nodejs sudo wget zsh \

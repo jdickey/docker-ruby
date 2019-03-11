@@ -86,6 +86,13 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 
 # Changelog
 
+## 0.17.1 (1 March 2019)
+
+Version 0.17.1
+
+* adds a Docker image label, `jdickey_ruby_image_version`, to the Docker image. Its initial value is, unsurprisingly, `0.17.1`;
+* Adds a build of Ruby 2.6.1 on Alpine Linux 3.9 to the existing Alpine Linux 3.8 versions.
+
 ## 0.17.0 (24 February 2019)
 
 Version 0.17.0 migrates Alpine images from Alpine 3.8 to 3.9. This *should* have no real effect on most use cases for these images.

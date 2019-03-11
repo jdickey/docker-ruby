@@ -16,6 +16,7 @@ LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
 LABEL description="Base image for ${RUBY_VERSION}alpine-${RUBY_EXTRA}, with NodeJS, but without Qt"
 LABEL includesQt=false
 LABEL version="${VERSION}"
+LABEL jdickey_ruby_image_version="${VERSION}"
 
 RUN apk add --no-cache alpine-sdk bash build-base libressl-dev nodejs tzdata zsh
 RUN gem install yard && yard config --gem-install-yri \

@@ -21,19 +21,28 @@ data:
           - 2.6-slim
           - 2-slim
           - slim
+      alpine3.9:
+        tags:
+          - 2.6.1-alpine39
+          - 2.6.1-alpine
+          - 2.6-alpine3.9
+          - 2.6-alpine39
+          - 2.6-alpine
+          - 2-alpine3.9
+          - 2-alpine39
+          - 2-alpine
+          - alpine3.9
+          - alpine39
+          - alpine
       alpine3.8:
         tags:
           - 2.6.1-alpine38
-          - 2.6.1-alpine
           - 2.6-alpine3.8
           - 2.6-alpine38
-          - 2.6-alpine
           - 2-alpine3.8
           - 2-alpine38
-          - 2-alpine
           - alpine3.8
           - alpine38
-          - alpine
     2.6.0:
       stretch:
         tags:
