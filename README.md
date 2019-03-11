@@ -86,6 +86,10 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 
 # Changelog
 
+## 0.17.2 (11 March 2019)
+
+Installs latest Bundler version (currently 2.0.1) with `--no-document`. This was previously the only Gem documentation in `/usr/local/bundle/doc`.
+
 ## 0.17.1 (1 March 2019)
 
 Version 0.17.1

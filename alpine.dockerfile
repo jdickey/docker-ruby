@@ -20,6 +20,6 @@ LABEL jdickey_ruby_image_version="${VERSION}"
 
 RUN apk add --no-cache alpine-sdk bash build-base libressl-dev nodejs tzdata zsh
 RUN gem install yard && yard config --gem-install-yri \
-    && gem install bundler && gem update --system && gem update && gem cleanup && \
+    && gem install --no-document bundler && gem update --system && gem update && gem cleanup && \
     for i in `gem list | grep ', ' | grep -v default | cut -d ' ' -f 1`; do gem uninstall -i /usr/local/lib/ruby/gems/$RUBY_MAJOR.0 $i; done && \
     gem cleanup
