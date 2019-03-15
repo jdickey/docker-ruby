@@ -41,30 +41,14 @@ fi
 ### Debian Stretch
 ###
 
-for RUBY_VERSION in 2.6.1 2.6.0 2.5.3; do
+for RUBY_VERSION in 2.6.2 2.5.4; do
   for STRETCH in stretch slim-stretch; do
     docker_build $RUBY_VERSION $STRETCH
   done
 done
 
-# ############################################################################ #
-
-# Note that, since there is no Alpine 3.8-based image for Ruby 2.5.1, we have to
-# adjust our build process here a bit.
-
-for RUBY_VERSION in 2.6.1; do
+for RUBY_VERSION in 2.6.2 2.5.4; do
   for ALPINE_VERSION in 3.9; do
-    docker build --build-arg RUBY_VERSION=$RUBY_VERSION \
-                 --build-arg RUBY_EXTRA=$ALPINE_VERSION \
-                 --build-arg VERSION=$DOCKER_RUBY_VERSION \
-                 --tag "jdickey/ruby:$RUBY_VERSION-alpine$ALPINE_VERSION" \
-                 --squash --compress --file alpine.dockerfile .
-    docker container prune -f && docker image prune -f
-  done
-done
-
-for RUBY_VERSION in 2.6.1 2.6.0 2.5.3; do
-  for ALPINE_VERSION in 3.8; do
     docker build --build-arg RUBY_VERSION=$RUBY_VERSION \
                  --build-arg RUBY_EXTRA=$ALPINE_VERSION \
                  --build-arg VERSION=$DOCKER_RUBY_VERSION \

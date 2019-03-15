@@ -86,6 +86,12 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 
 # Changelog
 
+## 0.18.0 (15 March 2019)
+
+[Ruby 2.6.2](https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-6-2-released/) and 2.5.**3** are the only versions built. (Ruby 2.5.**5** is the [latest official release from ruby-lang](https://www.ruby-lang.org/en/news/2019/03/15/ruby-2-5-5-released/); the automated Docker image builds typically lag by at least a day, which means that there *will* imminently be an 0.18.1 release of these images.)
+
+No images based on previous Ruby versions are built. Additionally, all Alpine-based images now use Alpine Linux 3.9, since the upstream images now all support that version.
+
 ## 0.17.2 (11 March 2019)
 
 Installs latest Bundler version (currently 2.0.1) with `--no-document`. This was previously the only Gem documentation in `/usr/local/bundle/doc`.
