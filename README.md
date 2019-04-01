@@ -86,6 +86,10 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 
 # Changelog
 
+## 0.18.1 (2 April 2019)
+
+Refreshed with updated Gem versions; no configuration changes made.
+
 ## 0.18.0 (15 March 2019)
 
 [Ruby 2.6.2](https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-6-2-released/) and 2.5.**3** are the only versions built. (Ruby 2.5.**5** is the [latest official release from ruby-lang](https://www.ruby-lang.org/en/news/2019/03/15/ruby-2-5-5-released/); the automated Docker image builds typically lag by at least a day, which means that there *will* imminently be an 0.18.1 release of these images.)
