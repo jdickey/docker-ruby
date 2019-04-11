@@ -11,6 +11,10 @@ I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/)
 
 ## IMPORTANT NOTES
 
+### Silent Gem Version Updates
+
+Image Version 0.18.2 will be the last explicitly-tagged image version which only updates Gem versions, without changes to either the list of Gems installed or the process of building these images. At least one of those two things must change to justify a new version tag going forward.
+
 ### Alpine Linux Versions
 
 Version 0.17.0 of these images includes support for Alpine Linux 3.9, the current release as of 29 January 2019. Version 0.16.0 had supported Alpine 3.8, and versions prior to that had supported Alpine 3.7. We will continue to support *only* the most recent stable release of Alpine Linux in our images; if that causes difficulties, please feel free to [open an issue](https://github.com/jdickey/docker-ruby/issues/new).
@@ -85,6 +89,12 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 * `zsh`
 
 # Changelog
+
+## 0.18.2 (11 April 2019)
+
+Refreshed with updated Gem versions; no configuration changes made.
+
+This will be the last explicitly-tagged image version which only updates Gem versions, without changes to either the list of Gems installed or the process of building these images. At least one of those two things must change to justify a new version tag going forward.
 
 ## 0.18.1 (2 April 2019)
 
