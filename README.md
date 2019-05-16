@@ -9,7 +9,7 @@
     * [Silent Gem Version Updates](#silent-gem-version-updates)
     * [Alpine Linux Versions](#alpine-linux-versions)
     * [Removal of capybara\-webkit and supporting json](#removal-of-capybara-webkit-and-supporting-json)
-    * [Ruby 2\.5\.0 to 2\.5\.2 No Longer Supported](#ruby-250-to-252-no-longer-supported)
+    * [Outdated Ruby and Alpine Versions No Longer Supported](#outdated-ruby-and-alpine-versions-no-longer-supported)
   * [Supported Tags](#supported-tags)
     * [Logical but Nonexistent Tags](#logical-but-nonexistent-tags)
     * [What? Where Are the Dockerfiles?](#what-where-are-the-dockerfiles)
@@ -17,6 +17,7 @@
   * [Debian Stretch](#debian-stretch)
   * [Alpine Linux](#alpine-linux)
 * [Changelog](#changelog)
+  * [0\.19\.1 (17 May 2019)](#0191-17-may-2019)
   * [0\.19\.0 (16 May 2019)](#0190-16-may-2019)
   * [0\.18\.2 (11 April 2019)](#0182-11-april-2019)
   * [0\.18\.1 (2 April 2019)](#0181-2-april-2019)
@@ -46,9 +47,6 @@
 * [Additional Documentation](#additional-documentation)
 * [Legal](#legal)
 
-Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc.go)
-
-
 # Overview
 
 I *often* build from Ruby [official base images](https://hub.docker.com/_/ruby/), install additional software packages, and do some basic Ruby housekeeping (installing Bundler and making sure the system Gems are up-to-date). On a reasonably modern iMac with a decent First World internet connection, this can take about *20 minutes.* Repeat this half-a-dozen times over the course of a day and you've lost two hours. As Orwell wrote, *doubleplus ungood.*
@@ -69,15 +67,17 @@ With effect from Version 0.16.0, there are no longer any `-qt` images built (tha
 
 This has been done because `capybara-webkit` has given us and countless other teams ulcers for quite some time, and our own downstream projects no longer use it (in favour of Capybara+Selenium presently, but [Rubium](https://github.com/vifreefly/rubium)) is firmly in the "assess" ring of our technology radar.) This also simplifies our build matrix and reduces the number of tags listed on Docker Hub.
 
-### Ruby 2.5.0 to 2.5.2 No Longer Supported
+### Outdated Ruby and Alpine Versions No Longer Supported
 
 Version 0.16.0 removes support for Ruby Version 2.5.1. The only supported 2.5.*x* Ruby version supported is Version 2.5.3. It also removes images based on Alpine Linux 3.7 in favour of Alpine 3.8.
+
+Later versions of these images continue to only include the 2.6.*x* and 2.5.*x* versions of Ruby, and the Alpine Linux base OS image, that were current at the time that they were built. Using minimally-specific image tags, e.g., `2-stretch` or `2.6-alpine`, is **recommended** *except* for testing and troubleshooting purposes.
 
 ## Supported Tags
 
 Each image has one tag that follows the format `2.x.y-os_build`, where
 
-1. `2.x.y` is the full version number of the Ruby version hosted by the image, which will be one of `2.6.1` (the current version), `2.6.0`, or `2.5.3` (the current `2.5` release). Again, you are **strongly urged** not to use releases prior to the latest Ruby version if at all possible for new images;
+1. `2.x.y` is the full version number of the Ruby version hosted by the image, which will be one of `2.6.3` (the current version) or `2.5.5` (the current `2.5` release);
 2. `os_build` identifies which OS and variant the image was based on. These can be any one of
 	1. `stretch`: Debian [Stretch](https://en.wikipedia.org/wiki/Debian#Code_names) (9.0). This is, by far, the largest variant of the image;
 	2. `stretch-slim`: A "slim" version of Stretch, but still considerably larger than anything built on Alpine;
@@ -87,11 +87,11 @@ The `latest` tag identifies the latest version of Ruby (as of Febuary 2019, vers
 
 Minor-version tags such as `2.6-stretch` or `2.5-alpine` identify the latest supported release of that minor version of Ruby on the specified OS build. As later versions of Ruby are released and supported (e.g., a hypothetical 2.6.2 or 2.5.4), the corresponding minor-version tag will be redefined to match the new full-version-number tag.
 
-Major-version tags (e.g., `2-stretch` or `2-alpine3.8`) identify the latest supported minor release of the latest supported major release of Ruby (currently `2.6.1`), and are updated in a manner analogous to minor-version tags; i.e., when Ruby 2.7 is released (expected to be in December, 2019), each major-version tag will be updated to match `2.7.0` on each respective operating system (e.g., `2.7.0-stretch`).
+Major-version tags (e.g., `2-stretch` or `2-alpine3.9`) identify the latest supported minor release of the latest supported major release of Ruby (currently `2.6.1`), and are updated in a manner analogous to minor-version tags; i.e., when Ruby 2.7 is released (expected to be in December, 2019), each major-version tag will be updated to match `2.7.0` on each respective operating system (e.g., `2.7.0-stretch`).
 
 Tags which *do not* include a Ruby version number are built using the latest supported version of Ruby on the OS build identified by their name, e.g., `stretch` or `alpine`. This differs from `latest` in that `latest` is presently defined as always being on the latest non-`slim` Debian build (currently `stretch`).
 
-Finally, the Alpine Linux OS build names differ from the Debian conventions in that Alpine is the only OS build that encodes (major and minor) version numbers. Hence, `alpine3.8` is synonymous with `alpine38` and, until a newer version of Alpine is supported by the [official Ruby base images](https://hub.docker.com/_/ruby/), `alpine` is as well. That is to say that `2.6.1-alpine3.8` and `alpine` (presently) reference the same image.
+Finally, the Alpine Linux OS build names differ from the Debian conventions in that Alpine is the only OS build that encodes (major and minor) version numbers. Hence, `alpine3.9` is synonymous with `alpine39` and, until a newer version of Alpine is supported by the [official Ruby base images](https://hub.docker.com/_/ruby/), `alpine` is as well. That is to say that `2.6.5-alpine3.9` and `alpine` (presently) reference the same image.
 
 ### Logical but Nonexistent Tags
 
@@ -116,6 +116,7 @@ The following Debian packages are installed in Debian-based images of this repo:
 
 * `build-essential`
 * `curl`
+* `less`
 * `nodejs`
 * `sudo`
 * `wget`
@@ -128,11 +129,19 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 * `alpine-sdk`
 * `bash`
 * `build-base`
+* `libressl-dev`
 * `nodejs`
 * `tzdata`
 * `zsh`
 
 # Changelog
+
+## 0.19.1 (17 May 2019)
+
+Repairing some typo-level errors.
+
+* Dockerfile templates no longer have obsolete Qt-related label content;
+* Several minor bits of outdated-content cleanup in this README; if you see others, open an issue!
 
 ## 0.19.0 (16 May 2019)
 

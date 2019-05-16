@@ -13,8 +13,7 @@ ARG VERSION
 ENV LANG en_US.UTF-8
 ENV LC_ALL C
 LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
-LABEL description="Base image for ${RUBY_VERSION}alpine-${RUBY_EXTRA}, with NodeJS, but without Qt"
-LABEL includesQt=false
+LABEL description="Base image for ${RUBY_VERSION}alpine-${RUBY_EXTRA}, with NodeJS"
 LABEL version="${VERSION}"
 LABEL jdickey_ruby_image_version="${VERSION}"
 
