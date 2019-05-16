@@ -3,13 +3,23 @@
 # This works for MRI; it may or may not work for other Rubies.
 RUBY_VERSION=`ruby --version | cut -d ' ' -f 2 | sed 's/p.*//'`
 
-rbenv gemset delete $RUBY_VERSION ./tmp/gemset
-rm -rf tmp/gemset .rbenv-gemsets
-mkdir -p tmp/gemset
-rbenv gemset create $RUBY_VERSION ./tmp/gemset
-echo ./tmp/gemset > .rbenv-gemsets
-rbenv rehash
+##
+## Initialise Gemset and setup if `rbenv` is available
+##
+
+rm -f Gemfile.lock .rbenv-gemsets
+
+if [[ `rbenv --version 2>/dev/null` ]]; then
+  rbenv local $RUBY_VERSION
+  rbenv gemset delete $RUBY_VERSION ./tmp/gemset 2>/dev/null || true
+  find ./tmp/gemset -delete 2>/dev/null || true
+  rbenv rehash
+  rbenv gemset create $RUBY_VERSION ./tmp/gemset
+  echo ./tmp/gemset > .rbenv-gemsets
+  rbenv rehash
+fi
+
 gem install yard
-yard config --gem-install-yri
-gem install docker-api minitest pry-byebug
 rbenv rehash
+yard config --gem-install-yri
+gem install docker-api minitest minitest-reporters minitest-tagz pry-byebug
