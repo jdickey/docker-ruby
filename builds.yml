@@ -1,15 +1,15 @@
 data:
   metadata:
-    image_version: 0.19.1
+    image_version: 0.21.0
   builds:
-    2.6.3:
+    2.6.4:
       stretch:
         actual_latest: true
         tags:
           - 2.6-stretch
           - 2-stretch
           - stretch
-          - '2.6.3'
+          - '2.6.4'
           - '2.6'
           - '2'
       slim-stretch:
@@ -17,14 +17,14 @@ data:
           - 2.6-slim-stretch
           - 2-slim-stretch
           - slim-stretch
-          - 2.6.3-slim
+          - 2.6.4-slim
           - 2.6-slim
           - 2-slim
           - slim
       alpine3.9:
         tags:
-          - 2.6.3-alpine39
-          - 2.6.3-alpine
+          - 2.6.4-alpine39
+          - 2.6.4-alpine
           - 2.6-alpine3.9
           - 2.6-alpine39
           - 2.6-alpine
@@ -34,21 +34,21 @@ data:
           - alpine3.9
           - alpine39
           - alpine
-    2.5.5:
+    2.5.6:
       stretch:
         tags:
           - 2.5-stretch
-          - '2.5.5'
+          - '2.5.6'
           - '2.5'
       slim-stretch:
         tags:
           - 2.5-slim-stretch
-          - 2.5.5-slim
+          - 2.5.6-slim
           - 2.5-slim
       alpine3.9:
         tags:
-          - 2.5.5-alpine39
-          - 2.5.5-alpine
+          - 2.5.6-alpine39
+          - 2.5.6-alpine
           - 2.5-alpine3.9
           - 2.5-alpine39
           - 2.5-alpine

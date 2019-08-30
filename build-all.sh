@@ -30,7 +30,7 @@ function docker_build() {
 if [[ -z $DOCKER_RUBY_VERSION ]]; then
   echo You MUST define the DOCKER_RUBY_VERSION environment variable when using this script.
   echo It will be encoded into the built images as a version ID.
-  echo Example usage: DOCKER_RUBY_VERSION=0.27.0 bash ./build_all.sh
+  echo Example usage: DOCKER_RUBY_VERSION=0.77.0 bash ./build_all.sh
   sleep 3
   exit 1
 fi
@@ -38,16 +38,14 @@ fi
 # ############################################################################ #
 
 ###
-### Debian Stretch
+### Build images for Debian and Alpine
 ###
 
-for RUBY_VERSION in 2.6.3 2.5.5; do
+for RUBY_VERSION in 2.6.4 2.5.6; do
   for STRETCH in stretch slim-stretch; do
     docker_build $RUBY_VERSION $STRETCH
   done
-done
 
-for RUBY_VERSION in 2.6.3 2.5.5; do
   for ALPINE_VERSION in 3.9; do
     docker build --build-arg RUBY_VERSION=$RUBY_VERSION \
                  --build-arg RUBY_EXTRA=$ALPINE_VERSION \

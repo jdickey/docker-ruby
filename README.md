@@ -17,6 +17,8 @@
   * [Debian Stretch](#debian-stretch)
   * [Alpine Linux](#alpine-linux)
 * [Changelog](#changelog)
+  * [0\.21\.0 (30 August 2019)](#0210-30-august-2019)
+  * [0\.20\.0 (28 August 2019)](#0200-28-august-2019)
   * [0\.19\.1 (17 May 2019)](#0191-17-may-2019)
   * [0\.19\.0 (16 May 2019)](#0190-16-may-2019)
   * [0\.18\.2 (11 April 2019)](#0182-11-april-2019)
@@ -135,6 +137,16 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 * `zsh`
 
 # Changelog
+
+## 0.21.0 (30 August 2019)
+
+* Included images for [Ruby 2.6.4](https://www.ruby-lang.org/en/news/2019/08/28/ruby-2-6-4-released/) and [Ruby 2.5.6](https://www.ruby-lang.org/en/news/2019/08/28/ruby-2-5-6-released/) rather than 2.6.3 and 2.5.5.
+
+## 0.20.0 (28 August 2019)
+
+* Added [locale settings](https://www.linux.com/news/controlling-your-locale-environment-variables/) support;
+* Last build for Ruby 2.6.3 and Ruby 2.5.5. New versions have been released upstream to address security vulnerabilities, and base images are [reportedly](https://hub.docker.com/_/ruby) built and tagged, but as of 17 May 2019 at 15:25:00, those new base images *are not* available.
+
 
 ## 0.19.1 (17 May 2019)
 
