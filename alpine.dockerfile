@@ -10,15 +10,14 @@ ARG RUBY_VERSION
 ARG RUBY_EXTRA
 ARG VERSION
 
-ENV LANG en_US.UTF-8
-ENV LC_ALL C
+ENV LANG=en_US.UTF-8 LC_ALL=C
 LABEL maintainer="Jeff Dickey <jdickey at seven-sigma dot com>"
 LABEL description="Base image for ${RUBY_VERSION}alpine-${RUBY_EXTRA}, with NodeJS"
 LABEL version="${VERSION}"
 LABEL jdickey_ruby_image_version="${VERSION}"
 
 # Install locales, which are not a default feature of Alpine Linux
-RUN apk add --no-cache alpine-sdk bash build-base ca-certificates libressl-dev nodejs tzdata wget zsh && \
+RUN apk add --no-cache alpine-sdk bash build-base ca-certificates libressl-dev nodejs the_silver_searcher tzdata wget zsh && \
     wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.30-r0/glibc-2.30-r0.apk && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.30-r0/glibc-bin-2.30-r0.apk && \

@@ -18,7 +18,7 @@ LABEL version="${VERSION}"
 LABEL jdickey_ruby_image_version="${VERSION}"
 
 RUN apt-get update -qq && apt-get dist-upgrade -y \
-    && apt-get install -y build-essential curl less locales-all nodejs sudo wget zsh \
+    && apt-get install -y build-essential curl less locales-all nodejs sudo wget silversearcher-ag zsh \
     && apt-get clean && find /var/lib/apt/lists/* -delete
 RUN gem install yard && yard config --gem-install-yri \
     && gem install --no-document bundler && gem update --system && gem update && gem cleanup && \
