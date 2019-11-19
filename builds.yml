@@ -1,54 +1,54 @@
 data:
   metadata:
-    image_version: 0.21.0
+    image_version: 0.22.0
   builds:
-    2.6.4:
-      stretch:
+    2.6.5:
+      buster:
         actual_latest: true
         tags:
-          - 2.6-stretch
-          - 2-stretch
-          - stretch
-          - '2.6.4'
+          - 2.6-buster
+          - 2-buster
+          - buster
+          - '2.6.5'
           - '2.6'
           - '2'
-      slim-stretch:
+      slim-buster:
         tags:
-          - 2.6-slim-stretch
-          - 2-slim-stretch
-          - slim-stretch
-          - 2.6.4-slim
+          - 2.6-slim-buster
+          - 2-slim-buster
+          - slim-buster
+          - 2.6.5-slim
           - 2.6-slim
           - 2-slim
           - slim
-      alpine3.9:
+      alpine3.10:
         tags:
-          - 2.6.4-alpine39
-          - 2.6.4-alpine
-          - 2.6-alpine3.9
-          - 2.6-alpine39
+          - 2.6.5-alpine310
+          - 2.6.5-alpine
+          - 2.6-alpine3.10
+          - 2.6-alpine310
           - 2.6-alpine
-          - 2-alpine3.9
-          - 2-alpine39
+          - 2-alpine3.10
+          - 2-alpine310
           - 2-alpine
-          - alpine3.9
-          - alpine39
+          - alpine3.10
+          - alpine310
           - alpine
-    2.5.6:
-      stretch:
+    2.5.7:
+      buster:
         tags:
-          - 2.5-stretch
-          - '2.5.6'
+          - 2.5-buster
+          - '2.5.7'
           - '2.5'
-      slim-stretch:
+      slim-buster:
         tags:
-          - 2.5-slim-stretch
-          - 2.5.6-slim
+          - 2.5-slim-buster
+          - 2.5.7-slim
           - 2.5-slim
-      alpine3.9:
+      alpine3.10:
         tags:
-          - 2.5.6-alpine39
-          - 2.5.6-alpine
-          - 2.5-alpine3.9
-          - 2.5-alpine39
+          - 2.5.7-alpine310
+          - 2.5.7-alpine
+          - 2.5-alpine3.10
+          - 2.5-alpine310
           - 2.5-alpine

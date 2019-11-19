@@ -17,6 +17,7 @@
   * [Debian Stretch](#debian-stretch)
   * [Alpine Linux](#alpine-linux)
 * [Changelog](#changelog)
+	* [0\.22\.0 (19 November 2019)](#0220-19-november-2019)
   * [0\.21\.0 (30 August 2019)](#0210-30-august-2019)
   * [0\.20\.0 (28 August 2019)](#0200-28-august-2019)
   * [0\.19\.1 (17 May 2019)](#0191-17-may-2019)
@@ -137,6 +138,10 @@ The following Alpine packages are installed in Alpine-based images of this repo:
 * `zsh`
 
 # Changelog
+
+## 0.22.0 (19 November 2019)
+
+* Included images for [Ruby 2.6.5](https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-6-5-released/) and [Ruby 2.5.7](https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-5-7-released/) rather than 2.6.4 and 2.5.6.
 
 ## 0.21.0 (30 August 2019)
 
